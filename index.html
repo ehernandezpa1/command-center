@@ -260,11 +260,70 @@ div.lined[contenteditable="false"] input[type=checkbox]{pointer-events:none}
 .kheads .hd{position:absolute;line-height:0}
 .kstr .sline.g{stroke:#27ae60}
 .kstr .sline{stroke:#7f8898}
+.ktb{gap:2px;padding:4px;background:#f1f3f7;border-radius:12px;overflow-x:auto;flex-wrap:nowrap;margin-bottom:8px}
+.ktb button{background:transparent;border:0;color:#1d2230;padding:6px 10px;font-size:13px;border-radius:8px;white-space:nowrap;gap:5px}
+.ktb button:hover{background:#e3e6ee}
+.ktb .sep{width:1px;background:#d3d8e2;align-self:stretch;margin:4px 3px;flex:none}
+.ktb button.on{background:#1d2230;color:#fff}
+.ksz{border:0;background:transparent}
+.ksz button{padding:6px 9px}
+.kprog{position:relative;height:22px;background:#e8ebf1;border-radius:99px;overflow:hidden;margin:0 0 8px;flex:none}
+.kpf{position:absolute;top:0;bottom:0;left:0;background:#2ecc71;transition:width .25s}
+.kprog span{position:relative;z-index:1;display:block;text-align:center;font-size:12px;line-height:22px;font-weight:600;color:#1d2230}
+.pinned{width:auto;min-width:96px;max-width:170px;padding:15px 8px 5px;border:1px solid #e3e6ee;border-radius:8px;font-size:13px;box-shadow:none}
+.pinned input{width:13px;height:13px}
+.kheads .hd svg{width:16px;height:22px}
+.btext{position:absolute;z-index:5;max-width:240px;font-size:15px;line-height:1.35;color:#1d2230;cursor:grab;touch-action:none;user-select:none;padding:2px 4px;border-radius:4px;overflow-wrap:anywhere}
+.btext.dk{color:#f2f4f8}
+.btext:hover{outline:1px dashed #9aa3b2}
+.bshort{position:absolute;z-index:5;display:flex;align-items:center;gap:2px;background:#eef3ff;border:1px solid #b7c9f5;color:#1d3d8f;border-radius:99px;padding:3px 4px 3px 12px;font-size:13px;cursor:pointer;touch-action:none;user-select:none}
+.bshort .sed{background:transparent;border:0;padding:2px 6px;color:#1d3d8f;font-size:12px;border-radius:99px}
+.btext.drag,.bshort.drag{box-shadow:0 6px 14px rgba(0,0,0,.2)}
+.cboard{border:12px solid #aeb4bf;border-radius:10px;background:#fff;padding:26px 14px 16px;min-height:200px;box-shadow:inset 0 0 12px rgba(0,0,0,.15),0 3px 8px rgba(0,0,0,.2)}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:30px 16px}
+.ctile{position:relative;border:1px solid #d9dde8;background:#fff;color:#1d2230;border-radius:8px;padding:30px 8px 8px;text-align:left;box-shadow:0 2px 5px rgba(0,0,0,.2);cursor:pointer}
+.ctile img{display:block;width:100%;height:110px;object-fit:contain;background:#f6f7fa;border-radius:4px;margin-bottom:6px}
+.ctile b{display:block;overflow-wrap:anywhere}
+.ctile small{color:#667086}
+.cmedal{position:absolute;top:-18px;left:50%;transform:translateX(-50%);line-height:0}
+.cimgwrap{max-width:100%;overflow:auto;border:1px solid var(--line);border-radius:12px;margin-top:12px;background:#fff}
+.cimg{display:block;max-width:100%;height:auto}
+.bp{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:99px;background:var(--accent);color:var(--accent-ink);border:0;font-weight:600;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.bpp{position:fixed;right:16px;bottom:calc(72px + env(safe-area-inset-bottom,0px));z-index:70;width:min(300px,calc(100vw - 32px));max-height:55vh;overflow:auto;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+#bpList{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.kprog{display:flex;align-items:center;gap:8px;height:auto;background:transparent;overflow:visible;margin:0 0 8px}
+.kpt{flex:1;height:5px;background:#e3e6ee;border-radius:99px;overflow:hidden}
+.kpf{position:static;height:100%;background:#2ecc71}
+.kprog span{position:static;display:block;z-index:auto;min-width:40px;text-align:center;font-size:12px;line-height:1.4;font-weight:600;color:#1d2230;background:rgba(255,255,255,.88);border-radius:99px;padding:0 7px}
+.shelfbtn{display:inline-flex;align-items:center;gap:6px;border:1px solid #d4a62a;color:#6b4f00;background:linear-gradient(#fff9e3,#ffe9a8);font-weight:600}
+.shelfbtn.on{background:#f1c40f;border-color:#b98f00;color:#3d2e00}
+.shelfbtn{background:var(--surface);border:1px solid var(--line);color:var(--ink);font-weight:400}
+.shelfbtn.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+#bkBtn{display:inline-flex;align-items:center;padding:8px 10px}
+.sw{cursor:pointer;user-select:none}
+.sw span{position:relative;z-index:1;padding:6px 18px;border-radius:99px;color:var(--ink);text-align:center}
+.sw span.on{color:var(--accent-ink)}
+.sw[data-off="1"]::before{opacity:.3}
+.sw[data-off="1"] span.on{color:var(--ink);font-weight:600}
+.tabs.sub .sw span{padding:4px 14px;font-size:14px}
+.sw:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chip .tk{font-size:calc(11px*var(--ts,1))}
+.chip .tk.tkb{font-size:calc(12px*var(--ts,1));color:inherit;line-height:1.35;padding-left:12px;position:relative}
+.chip .tk.tkb::before{content:"\2022";position:absolute;left:2px;top:0}
+.chip .tk.tkb.done{text-decoration:line-through;opacity:.6}
+.chip[style*="--ts"]{font-size:calc(13px*var(--ts))}
+.btext{max-width:320px}
+.btext ul,.btext ol{margin:.2em 0;padding-left:1.2em}
+#teEd{min-height:120px;max-height:40vh;overflow:auto;border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff;color:#1d2230;margin-top:8px;font-size:15px;line-height:1.35}
+#teEd ul,#teEd ol{margin:.2em 0;padding-left:1.2em}
+#teCols{display:inline-flex;gap:4px;align-items:center;padding:0 4px}
+#teCols button{width:22px;height:22px;min-width:0;padding:0;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.3)}
+#teSz{font-size:13px;color:var(--mute);min-width:36px;text-align:center;align-self:center}
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="top" style="align-items:flex-start"><div class="tabs" id="tabs" role="tablist" style="flex:1;min-width:0"></div><button id="bkBtn" title="Back up or restore your data">Backup</button></div>
+  <div class="top" style="align-items:flex-start"><div class="tabs" id="tabs" role="tablist" style="flex:1;min-width:0"></div><span class="row" style="margin:0"><button id="shelfBtn" class="shelfbtn">Shelf</button><button id="bkBtn" title="Save a backup" aria-label="Save or restore a backup"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h11l3 3v15H5z"/><path d="M8 3v5h7V3"/><rect x="8" y="13" width="8" height="8"/></svg></button></span></div>
   <section class="cal" id="cal"></section>
   <section class="cal" id="store" style="margin-top:16px"></section>
   <section class="cal" id="todo" hidden></section>
@@ -279,9 +338,21 @@ div.lined[contenteditable="false"] input[type=checkbox]{pointer-events:none}
   <div class="row" style="justify-content:flex-end;margin-top:16px"><button id="edClose">Stay here</button><button class="primary" id="edGo">Open Logs tab</button></div>
 </dialog>
 
+<dialog id="tedlg">
+  <h2 id="teTitle" style="margin:0 0 10px;font-size:22px">Text</h2>
+  <div class="tb" id="teTb" role="toolbar" aria-label="Text tools">
+    <button data-k="bold" aria-label="Bold"><b>B</b></button><button data-k="italic" aria-label="Italic"><i>I</i></button><button data-k="underline" aria-label="Underline"><u>U</u></button><button data-k="strikeThrough" aria-label="Strikethrough"><s>S</s></button>
+    <button data-k="insertUnorderedList">&bull; List</button><button data-k="justifyLeft">Left</button><button data-k="justifyCenter">Center</button><button data-k="justifyRight">Right</button>
+    <span id="teCols"></span><button id="teSm" aria-label="Smaller text">A&minus;</button><span id="teSz"></span><button id="teLg" aria-label="Larger text">A+</button>
+  </div>
+  <div id="teEd" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Text"></div>
+  <div class="row" style="justify-content:space-between;margin-top:14px"><button id="teDel">Delete</button><div class="row" style="margin:0"><button id="teCancel">Cancel</button><button class="primary" id="teOk">Save</button></div></div>
+</dialog>
+
 <dialog id="xdlg">
   <h2 id="xTitle" style="margin:0 0 12px;font-size:22px"></h2>
   <textarea id="xText" rows="3" aria-label="Text"></textarea>
+  <select id="xSel" hidden aria-label="Destination" style="width:100%;margin-top:10px;font:inherit;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)"></select>
   <div class="row" id="xCols" hidden style="flex-wrap:wrap;margin:12px 0 0"></div>
   <div class="warn" id="xWarn" hidden></div>
   <div class="row" style="justify-content:space-between;margin-top:18px">
@@ -290,12 +361,22 @@ div.lined[contenteditable="false"] input[type=checkbox]{pointer-events:none}
   </div>
 </dialog>
 
+<dialog id="bdlg2">
+  <div class="top"><h2 style="margin:0;font-size:22px">Backup</h2><button class="ghost" id="bk2Close" aria-label="Close">&times;</button></div>
+  <div class="empty" style="margin:6px 0 8px">Copy saves your data to the clipboard. To restore, press Paste, then Restore.</div>
+  <textarea id="bk2Text" rows="5" style="font-size:12px" aria-label="Backup text" placeholder="Backup text appears here"></textarea>
+  <div class="warn" id="bk2Msg" hidden></div>
+  <div class="row" style="margin-top:12px"><button class="primary" id="bk2Copy" style="flex:1">Copy</button><button id="bk2Paste" style="flex:1">Paste</button><button id="bk2Restore" style="flex:1">Restore</button></div>
+  <details style="margin-top:12px"><summary style="cursor:pointer;color:var(--mute);font-size:14px">Automatic saves</summary><div id="bk2Auto" style="margin-top:6px"></div></details>
+</dialog>
+
 <dialog id="bdlg">
   <h2 style="margin:0 0 8px;font-size:22px">Backup and restore</h2>
-  <div class="empty" style="margin-bottom:8px">Your data is saved on this device automatically. To keep a safe copy or move it to another device, copy the backup text below. To restore, paste a backup into the box and press Restore.</div>
-  <textarea id="bkText" rows="8" style="font-size:12px" aria-label="Backup data"></textarea>
+  <div class="empty" style="margin-bottom:8px">Nothing is copied until you press Copy backup, so your clipboard stays untouched. To restore, copy a saved backup first, then press Paste and restore. You can also pick an automatic save below.</div>
+  <details style="margin-top:6px"><summary style="cursor:pointer;color:var(--mute);font-size:14px">Paste or view backup text</summary><textarea id="bkText" rows="6" style="font-size:12px;margin-top:6px" aria-label="Backup data"></textarea><button id="bkRestore" style="margin-top:6px">Restore from text</button></details>
   <div class="warn" id="bkMsg" hidden></div>
-  <div class="row" style="justify-content:space-between;margin-top:14px"><button id="bkCopy">Copy backup</button><div class="row" style="margin:0"><button id="bkClose">Close</button><button class="primary" id="bkRestore">Restore from text</button></div></div>
+  <div id="bkAuto" style="margin-top:12px"></div>
+  <div class="row" style="justify-content:space-between;margin-top:14px"><button id="bkCopy">Copy backup</button><div class="row" style="margin:0"><button id="bkClose">Close</button><button class="primary" id="bkPaste">Paste and restore</button></div></div>
 </dialog>
 
 <dialog id="pdlg">
@@ -365,10 +446,14 @@ div.lined[contenteditable="false"] input[type=checkbox]{pointer-events:none}
   <div class="top"><h2 id="cTitle" style="margin:0;font-size:22px"></h2><button class="ghost" id="cClose" aria-label="Close">&times;</button></div>
   <div class="row" style="margin:0 0 8px;align-items:center;flex-wrap:wrap"><input type="date" id="cDay" aria-label="Day"><button id="cStore">Move to storage</button><button id="cDup">Duplicate</button></div>
   <div id="cTasks"></div>
+  <div class="row" style="margin:10px 0 0;align-items:center"><span style="font-size:14px;color:var(--mute)">Text size</span><button id="cSm" aria-label="Smaller text">&minus;</button><span id="cSz" style="min-width:48px;text-align:center"></span><button id="cLg" aria-label="Larger text">+</button></div>
   <div class="empty" id="cLogMsg" style="margin-top:6px"></div>
   <div class="row"><input type="text" id="cNew" placeholder="Add a task for this day"><button id="cAdd">Add</button></div>
   <div class="row" style="justify-content:flex-end;margin-top:16px"><button class="primary" id="cDone">Done</button></div>
 </dialog>
+
+<button class="bp" id="bpBtn" hidden aria-label="Open backpack"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6a2 2 0 0 1 2 2v1H7V5a2 2 0 0 1 2-2z"/><rect x="4" y="6" width="16" height="15" rx="4"/><path d="M9 14h6"/></svg>Backpack<span id="bpCount" style="opacity:.8"></span></button>
+<div class="bpp" id="bpPanel" hidden role="dialog" aria-label="Backpack"><div class="top"><b>Backpack</b><button class="ghost" id="bpClose" aria-label="Close backpack">&times;</button></div><div class="empty">Drag a card to a date, or tap a card and then tap a date.</div><div id="bpList"></div><button id="bpAdd">+ Add card</button></div>
 
 <script>
 const KEYS={projects:"project-desk-v1",learning:"project-desk-learning-v1"};
@@ -384,11 +469,15 @@ function safeLoad(k,ok){let raw=null;try{raw=localStorage.getItem(k)}catch(e){re
   if(o!==undefined&&(!ok||ok(o)))return o;
   try{if(localStorage.getItem(k+"-corrupt")===null)localStorage.setItem(k+"-corrupt",raw)}catch(e2){}
   return null}
-const DATA_VERSION=1,ALL_KEYS=["project-desk-v1","project-desk-learning-v1","project-desk-shelf-v1","project-desk-todo-v1","project-desk-page","project-desk-boards-v1"];
+const DATA_VERSION=2,ALL_KEYS=["project-desk-v1","project-desk-learning-v1","project-desk-shelf-v1","project-desk-todo-v1","project-desk-page","project-desk-boards-v1"];
 (function(){let v=0;try{v=+localStorage.getItem("project-desk-schema")||0}catch(e){}
   if(v>=DATA_VERSION)return;
   try{if(v>0){const snap={};ALL_KEYS.forEach(k=>{const x=localStorage.getItem(k);if(x!==null)snap[k]=x});localStorage.setItem("project-desk-prebackup-v"+v,JSON.stringify(snap))}
-    /* future data upgrades go here, for example: if(v<2){...} */
+    if(v>0&&v<2){["project-desk-v1","project-desk-learning-v1"].forEach(k=>{try{const raw=localStorage.getItem(k);if(!raw)return;const o=JSON.parse(raw);
+      const inc=s=>{const d=new Date(s+"T00:00");d.setDate(d.getDate()+1);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+      if(o.notes){const n={};Object.keys(o.notes).forEach(x=>{n[/^\d{4}-\d{2}-\d{2}$/.test(x)?inc(x):x]=o.notes[x]});o.notes=n}
+      (o.cal||[]).forEach(c=>(c.tasks||[]).forEach(t=>{if(t.lw)t.lw=inc(t.lw)}));
+      localStorage.setItem(k,JSON.stringify(o))}catch(e){}})}
     localStorage.setItem("project-desk-schema",String(DATA_VERSION))}catch(e){}})();
 let S=safeLoad(KEY,o=>o&&Array.isArray(o.list));
 if(!S||!Array.isArray(S.list))S={list:SEEDS[page].map(n=>({id:nid(),name:n})),cal:[]};
@@ -406,20 +495,20 @@ function render(){
   $("boards").hidden=true;
   $("shelf").hidden=true;
   $("todo").hidden=true;$("cal").hidden=false;$("store").hidden=false;
-  const y=vm.getFullYear(),m=vm.getMonth(),first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate(),today=ymd(new Date());
+  const y=vm.getFullYear(),m=vm.getMonth(),first=(new Date(y,m,1).getDay()+6)%7,days=new Date(y,m+1,0).getDate(),today=ymd(new Date());
   let cells="";
   for(let i=first;i>0;i--)cells+=dayHtml(new Date(y,m,1-i),today,true);
   for(let d=1;d<=days;d++){const k=ymd(new Date(y,m,d));
     const es=S.cal.filter(e=>e.date===k).map(e=>{const p=S.list.find(x=>x.id===e.pid);if(!p)return"";const t=e.tasks||[];
       return `<div class="chip" draggable="true" data-e="${e.id}" style="border-left-color:${col(p)}"><span data-edit="${e.id}"><b>${esc(p.name)}</b>${t.slice(0,3).map(x=>`<small class="tk ${x.d?"done":""}">${esc(x.t)}</small>`).join("")||'<small class="tk">Tap to add tasks</small>'}${t.length>3?`<small class="tk">+${t.length-3} more</small>`:""}</span><button class="ghost" data-rm="${e.id}" aria-label="Remove from day">&times;</button></div>`}).join("");
-    cells+=`<div class="day ${k===today?"today":""}" data-d="${k}" data-wkk="${ymd(new Date(y,m,d-new Date(y,m,d).getDay()))}"><div class="dn">${focusWeek?new Date(y,m,d).toLocaleDateString("default",{weekday:"short"})+" ":""}${d}</div>${dayCards(k)}</div>`;
-    const dw=new Date(y,m,d).getDay();
+    cells+=`<div class="day ${k===today?"today":""}" data-d="${k}" data-wkk="${ymd(new Date(y,m,d-(new Date(y,m,d).getDay()+6)%7))}"><div class="dn">${focusWeek?new Date(y,m,d).toLocaleDateString("default",{weekday:"short"})+" ":""}${d}</div>${dayCards(k)}</div>`;
+    const dw=(new Date(y,m,d).getDay()+6)%7;
     if(dw===6||d===days){for(let i=dw+1;i<=6;i++)cells+=dayHtml(new Date(y,m+1,i-dw),today,true);const wk=ymd(new Date(y,m,d-dw)),nt=plain((S.notes||{})[wk]||"").trim();cells+=`<div class="wk" data-wkk="${wk}"><button data-zw="${wk}" aria-pressed="${focusWeek===wk}" title="${focusWeek===wk?"Show the whole month":"Zoom in on this week"}">Week ${weekNo(wk)}${focusWeek===wk?" ✕":""}</button><button data-wn="${wk}">LOG${nt?" •":""}</button><span class="wnote">${esc(nt)}</span></div>`}}
   $("cal").innerHTML=`<div class="top"><h3>${vm.toLocaleString("default",{month:"long",year:"numeric"})}</h3><div class="row" style="margin:0"><button id="mlog">MONTH LOG${plain((S.notes||{})["m:"+y+"-"+String(m+1).padStart(2,"0")]||"").trim()?" •":""}</button><button id="pm" aria-label="Previous month">&lsaquo;</button><button id="nm" aria-label="Next month">&rsaquo;</button></div></div>
   <div class="tray">${S.list.map(p=>`<div class="chip pick ${armed===p.id?"armed":""}" draggable="true" data-p="${p.id}" style="border-left-color:${col(p)}"><span>${esc(p.name)}</span><button class="ghost" data-m="${p.id}" aria-label="Rename or delete ${esc(p.name)}">&#9998;</button></div>`).join("")||`<div class="empty">No ${noun()}s yet. Tap + to add one.</div>`}<button id="plus" aria-label="Add project" style="padding:4px 16px;font-size:20px;line-height:1.3">+</button></div>
   
   <div class="empty">Drag a ${noun()} onto a day, or tap a ${noun()}, then tap a day. Tap a card on the calendar to add tasks. Tap the pencil to rename or delete a ${noun()}.</div>
-  <div class="grid${focusWeek?" focus":""}">${["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(w=>`<div class="wd">${w}</div>`).join("")}${cells}</div>`;
+  <div class="grid${focusWeek?" focus":""}">${["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map(w=>`<div class="wd">${w}</div>`).join("")}${cells}</div>`;
   wire();renderStore();applyWords();
 }
 const noun=()=>page==="learning"?"topic":"project";
@@ -434,13 +523,13 @@ function switchPage(p){
   if(!s||!Array.isArray(s.list))s={list:SEEDS[p].map(n=>({id:nid(),name:n})),cal:[]};
   s.cal=s.cal||[];s.list.forEach((q,i)=>{if(q.h===undefined)q.h=(i*47)%360});
   S=s;armed=null;render()}
-function applyWords(){const n=noun();$("aTitle").textContent="New "+n;$("aAdd").textContent="Add "+n;$("mTitle").textContent="Edit "+n;$("mDel").textContent="Delete "+n;document.title="Command Center";document.body.dataset.page=mode==="cal"?page:"";
-  $("tabs").innerHTML=navHtml();const _navOld=["projects","learning","shelf"].map(p=>{const on=mode==="cal"?p===page:p===mode;return `<button role="tab" aria-selected="${on}" data-pg="${p}" class="${on?"on":""}">${p==="projects"?"Projects":p==="learning"?"Learning topics":"Shelf"}</button>`}).join("");
+function applyWords(){const n=noun();$("aTitle").textContent="New "+n;$("aAdd").textContent="Add "+n;$("mTitle").textContent="Edit "+n;$("mDel").textContent="Delete "+n;document.title="Command Center";document.body.dataset.page=mode==="cal"?page:"";updateBp();
+  $("tabs").innerHTML=navHtml();wireSwitch();$("shelfBtn").classList.toggle("on",mode==="shelf");const _navOld=["projects","learning","shelf"].map(p=>{const on=mode==="cal"?p===page:p===mode;return `<button role="tab" aria-selected="${on}" data-pg="${p}" class="${on?"on":""}">${p==="projects"?"Projects":p==="learning"?"Learning topics":"Shelf"}</button>`}).join("");
   $("tabs").querySelectorAll("[data-pg]").forEach(b=>b.onclick=()=>switchPage(b.dataset.pg))}
 let focusWeek=null;
-const weekNo=k=>{const s=new Date(k+"T00:00"),sat=new Date(s.getFullYear(),s.getMonth(),s.getDate()+6),j=new Date(sat.getFullYear(),0,1),doy=Math.round((sat-j)/864e5)+1;return Math.floor((doy-1+j.getDay())/7)+1};
-const nameFit=n=>{const L=Math.max(4,...n.split(/\s+/).map(w=>w.length));return `font-size:12px;font-size:clamp(8px,calc((100cqw - var(--ov,30px))/${(L*0.62).toFixed(2)}),13px)`};
-const dayCards=k=>S.cal.filter(e=>e.date===k).map(e=>{const p=S.list.find(x=>x.id===e.pid);if(!p)return"";const t=e.tasks||[],lim=focusWeek?99:3;return `<div class="chip" draggable="true" data-e="${e.id}" style="border-left-color:${col(p)}"><span data-edit="${e.id}"><b style="${nameFit(p.name)}">${esc(p.name)}</b>${t.slice(0,lim).map(x=>`<small class="tk ${x.d?"done":""}">${esc(x.t)}</small>`).join("")||'<small class="tk">Tap to add tasks</small>'}${t.length>lim?`<small class="tk">+${t.length-lim} more</small>`:""}</span><button class="ghost" data-rm="${e.id}" aria-label="Remove from day">&times;</button></div>`}).join("");
+const weekNo=k=>{const s=new Date(k+"T00:00"),sat=new Date(s.getFullYear(),s.getMonth(),s.getDate()+6),j=new Date(sat.getFullYear(),0,1),doy=Math.round((sat-j)/864e5)+1;return Math.floor((doy-1+(j.getDay()+6)%7)/7)+1};
+const nameFit=n=>{const L=Math.max(4,...n.split(/\s+/).map(w=>w.length));return `font-size:calc(var(--ts,1)*12px);font-size:calc(var(--ts,1)*clamp(8px,calc((100cqw - var(--ov,30px))/${(L*0.62).toFixed(2)}),13px))`};
+const dayCards=k=>S.cal.filter(e=>e.date===k).map(e=>{const p=S.list.find(x=>x.id===e.pid);if(!p)return"";const t=e.tasks||[],lim=focusWeek?99:3;return `<div class="chip" draggable="true" data-e="${e.id}" style="border-left-color:${col(p)}${e.sz&&e.sz!==1?";--ts:"+e.sz:""}"><span data-edit="${e.id}"><b style="${nameFit(p.name)}">${esc(p.name)}</b>${t.slice(0,lim).map(x=>`<small class="tk tkb ${x.d?"done":""}">${esc(x.t)}</small>`).join("")||'<small class="tk">Tap to add tasks</small>'}${t.length>lim?`<small class="tk">+${t.length-lim} more</small>`:""}</span><button class="ghost" data-rm="${e.id}" aria-label="Remove from day">&times;</button></div>`}).join("");
 let T=safeLoad("project-desk-todo-v1",o=>o&&Array.isArray(o.lists));
 if(!T||!Array.isArray(T.lists))T={lists:["Chores","Housework","Groceries"].map(n=>({id:nid(),name:n,items:[]}))};
 const saveT=()=>{try{localStorage.setItem("project-desk-todo-v1",JSON.stringify(T))}catch(e){}};
@@ -479,6 +568,7 @@ function renderShelf(){
   $("cal").hidden=true;$("store").hidden=true;$("todo").hidden=true;const box=$("shelf");box.hidden=false;
   const pad=openPad?P.pads.find(x=>x.id===openPad):null;
   if(!pad){openPad=null;
+    if(shelfTab==="completions"){renderCompletions(box);applyWords();return}
     if(shelfTab!=="pads"){renderLogs(box);applyWords();return}
     const per=Math.max(2,Math.floor((Math.min(window.innerWidth,1060)-(window.innerWidth<600?80:92)+12)/130));
     const items=P.pads.map(p=>`<button class="pad${p.locked?" book":""}" data-po="${p.id}" style="--pc:${p.color};height:${150+padH(p.id)}px"><span class="plabel">${esc(p.name)}</span><small>${p.sheets.length} sheet${p.sheets.length>1?"s":""}</small></button>`).concat(['<button class="pad newpad" id="pNew" aria-label="Add pad">+</button>']);
@@ -525,7 +615,7 @@ document.addEventListener("mouseover",e=>{const el=e.target.closest&&e.target.cl
 document.addEventListener("click",hidePop);document.addEventListener("dragstart",hidePop);window.addEventListener("scroll",hidePop,true);
 let shelfTab="pads";
 const subTabsOld=()=>`<div class="tabs sub" role="tablist">${["pads","projects","learning"].map(t=>`<button role="tab" aria-selected="${t===shelfTab}" data-st="${t}" class="${t===shelfTab?"on":""}">${t==="pads"?"Pads":t==="projects"?"Project logs":"Learning logs"}</button>`).join("")}</div>`;
-const wireSub=box=>box.querySelectorAll("[data-st]").forEach(b=>b.onclick=()=>{shelfTab=b.dataset.st;renderShelf()});
+const wireSub=box=>box.querySelectorAll("[data-st]").forEach(b=>{b.onclick=()=>{shelfTab=b.dataset.st;renderShelf()};b.onkeydown=e=>{if(b.tagName!=="BUTTON"&&(e.key==="Enter"||e.key===" ")){e.preventDefault();b.click()}}});
 function collectLogs(){const out=[];
   [["projects","Projects"],["learning","Learning topics"]].forEach(([pg,label])=>{
     let N;if(pg===page)N=S.notes||{};else{try{N=(JSON.parse(localStorage.getItem(KEYS[pg]))||{}).notes||{}}catch(e){N={}}}
@@ -663,13 +753,14 @@ function weekLabel(k){const s=new Date(k+"T00:00"),e=new Date(s.getFullYear(),s.
 function compileMonth(N,y,m){
   const first=new Date(y,m-1,1),last=new Date(y,m,0),parts=[],mo=N["m:"+y+"-"+String(m).padStart(2,"0")]||"";
   if(plain(mo).trim())parts.push(`<div><b>Month log</b></div>${toHtml(mo)}`);
-  for(let d=new Date(y,m-1,1-first.getDay());d<=last;d.setDate(d.getDate()+7)){const n=N[ymd(d)]||"";if(wedIn(d,y,m)&&plain(n).trim())parts.push(`<div><b>${esc(weekLabel(ymd(d)))}</b></div>${toHtml(n)}`)}
+  for(let d=new Date(y,m-1,1-(first.getDay()+6)%7);d<=last;d.setDate(d.getDate()+7)){const n=N[ymd(d)]||"";if(wedIn(d,y,m)&&plain(n).trim())parts.push(`<div><b>${esc(weekLabel(ymd(d)))}</b></div>${toHtml(n)}`)}
   return parts.join("<div><br></div>")}
 const BK_KEYS=["project-desk-v1","project-desk-learning-v1","project-desk-shelf-v1","project-desk-todo-v1","project-desk-page","project-desk-boards-v1"];
 let bkSure=false;
 function bkMake(){const d={};BK_KEYS.forEach(k=>{try{const v=localStorage.getItem(k);if(v!==null)d[k]=v}catch(e){}});return JSON.stringify({app:"project-desk",v:1,saved:new Date().toISOString(),data:d})}
 function bkMsg(t,ok){const m=$("bkMsg");m.hidden=false;m.textContent=t;m.style.color=ok?"var(--accent)":"#c0392b"}
-$("bkBtn").onclick=()=>{bkSure=false;$("bkRestore").textContent="Restore from text";$("bkText").value=bkMake();$("bkMsg").hidden=true;$("bdlg").showModal()};
+$("bkBtn").onclick=()=>{bkSure=false;pasteSure=false;$("bkRestore").textContent="Restore from text";$("bkPaste").textContent="Paste and restore";const t=bkMake();$("bkText").value=t;$("bdlg").showModal();drawAuto();
+  $("bkMsg").hidden=true};
 $("bkClose").onclick=()=>$("bdlg").close();
 $("bkCopy").onclick=async()=>{const t=$("bkText");t.value=bkMake();t.select();let ok=false;try{await navigator.clipboard.writeText(t.value);ok=true}catch(e){try{ok=document.execCommand("copy")}catch(e2){}}bkMsg(ok?"Copied. Paste it somewhere safe, like a note or an email to yourself.":"Could not copy automatically. The text is selected, so copy it by hand.",ok)};
 $("bkRestore").onclick=()=>{let o;try{o=JSON.parse($("bkText").value)}catch(e){bkMsg("That is not a valid backup.",false);return}
@@ -696,7 +787,7 @@ $("nGoLogs").onclick=()=>{$("ndlg").close();goLogs()};
 function logTask(card,task,on){S.notes=S.notes||{};
   const p=S.list.find(x=>x.id===card.pid),msg=$("cLogMsg");
   if(on){if(!card.date)return;
-    const d=new Date(card.date+"T00:00"),wk=ymd(new Date(d.getFullYear(),d.getMonth(),d.getDate()-d.getDay()));
+    const d=new Date(card.date+"T00:00"),wk=ymd(new Date(d.getFullYear(),d.getMonth(),d.getDate()-(d.getDay()+6)%7));
     task.id=task.id||nid();task.lw=wk;
     const cur=S.notes[wk]||"";
     if(!cur.includes('data-task="'+task.id+'"')){
@@ -714,14 +805,14 @@ let flashId=null;
 function flashNew(){if(!flashId)return;const id=flashId;flashId=null;const el=document.querySelector(`#store [data-e="${id}"]`);if(!el)return;el.classList.add("flash");el.scrollIntoView({behavior:"smooth",block:"center"})}
 let lastLogs=null;
 function navHtml(){const cal=mode==="cal",pj=cal&&page==="projects",ln=cal&&page==="learning";
-  return `<div class="sw" role="radiogroup" aria-label="Section" data-on="${page==="learning"?1:0}"${cal?"":' data-off="1"'}><button role="radio" aria-checked="${pj}" data-pg="projects" class="${pj?"on":""}">Projects</button><button role="radio" aria-checked="${ln}" data-pg="learning" class="${ln?"on":""}">Learning</button></div><button role="tab" aria-selected="${mode==="shelf"}" data-pg="shelf" class="${mode==="shelf"?"on":""}">Shelf</button><button role="tab" aria-selected="${mode==="boards"}" data-pg="boards" class="${mode==="boards"?"on":""}">Boards</button>`}
-const subTabs=()=>{const lg=shelfTab!=="pads";if(lg)lastLogs=shelfTab;
+  return `<div class="sw" role="switch" tabindex="0" aria-checked="${page==="learning"}" aria-label="${cal?"Switch between Projects and Learning":"Back to the "+(page==="learning"?"Learning":"Projects")+" calendar"}" data-on="${page==="learning"?1:0}"${cal?"":' data-off="1"'}><span class="${page==="projects"?"on":""}">Projects</span><span class="${page==="learning"?"on":""}">Learning</span></div><button role="tab" aria-selected="${mode==="boards"}" data-pg="boards" class="${mode==="boards"?"on":""}">Boards</button>`}
+const subTabsOld2=()=>{const lg=shelfTab!=="pads";if(lg)lastLogs=shelfTab;
   return `<div class="tabs sub" role="tablist"><button role="tab" aria-selected="${!lg}" data-st="pads" class="${!lg?"on":""}">Pads</button><button role="tab" aria-selected="${lg}" data-st="${lg?shelfTab:(lastLogs||(page==="learning"?"learning":"projects"))}" class="${lg?"on":""}">Logs</button>${lg?`<div class="sw" role="radiogroup" aria-label="Logs for" data-on="${shelfTab==="learning"?1:0}"><button role="radio" aria-checked="${shelfTab==="projects"}" data-st="projects" class="${shelfTab==="projects"?"on":""}">Projects</button><button role="radio" aria-checked="${shelfTab==="learning"}" data-st="learning" class="${shelfTab==="learning"?"on":""}">Learning</button></div>`:""}</div>`};
 let xCfg=null,xArm=false;
-function askText(c){xCfg=c;xArm=false;$("xTitle").textContent=c.title;$("xText").hidden=!!c.noText;xColor=c.colors?(c.colors.value||null):null;drawXCols(c.colors);$("xText").value=c.value||"";$("xText").placeholder=c.ph||"";$("xOk").textContent=c.ok||"Save";$("xDel").hidden=!c.del;$("xDel").textContent=c.del?c.del.label:"Delete";$("xWarn").hidden=true;$("xdlg").showModal();$("xText").focus();$("xText").select()}
-function xSubmit(){const v=$("xText").value.trim();if(!v&&!xCfg.noText)return;$("xdlg").close();xCfg.onOk(v,xColor)}
+function askText(c){xCfg=c;xArm=false;$("xTitle").textContent=c.title;$("xText").hidden=!!c.noText;xColor=c.colors?(c.colors.value||null):null;drawXCols(c.colors);$("xText").value=c.value||"";$("xText").placeholder=c.ph||"";$("xOk").textContent=c.ok||"Save";$("xDel").hidden=!c.del;$("xDel").textContent=c.del?c.del.label:"Delete";$("xWarn").hidden=!c.msg;$("xWarn").textContent=c.msg||"";$("xWarn").style.color=c.msg?"var(--ink)":"";const sl=c.select;$("xSel").hidden=!sl;if(sl)$("xSel").innerHTML=sl.options.map(([l,v])=>`<option value="${esc(v)}"${v===sl.value?" selected":""}>${esc(l)}</option>`).join("");$("xdlg").showModal();$("xText").focus();$("xText").select()}
+function xSubmit(){const v=$("xText").value.trim();if(!v&&!xCfg.noText)return;$("xdlg").close();xCfg.onOk(v,xColor,$("xSel").hidden?null:$("xSel").value)}
 $("xOk").onclick=xSubmit;$("xText").onkeydown=e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();xSubmit()}};$("xCancel").onclick=()=>$("xdlg").close();
-$("xDel").onclick=()=>{const d=xCfg.del;if(!xArm){xArm=true;$("xDel").textContent="Tap again to delete";if(d.warn){$("xWarn").hidden=false;$("xWarn").textContent=d.warn}return}$("xdlg").close();d.onDel()};
+$("xDel").onclick=()=>{const d=xCfg.del;if(!xArm){xArm=true;$("xDel").textContent="Tap again to delete";if(d.warn){$("xWarn").hidden=false;$("xWarn").style.color="";$("xWarn").textContent=d.warn}return}$("xdlg").close();d.onDel()};
 const mkBoard=n=>({id:nid(),name:n,cols:[],strings:[],pins:[]});
 let K=safeLoad("project-desk-boards-v1",o=>o&&Array.isArray(o.boards));
 if(!K)K={boards:[mkBoard("My board")],cur:null};
@@ -818,7 +909,7 @@ function tie(b,p,el){if(!strFrom){strFrom=p.id;el.classList.add("tsel");const h=
   if(!b.strings.some(s=>(s.a===a&&s.b===c)||(s.a===c&&s.b===a)))b.strings.push({id:nid(),a,b:c});
   saveK();renderBoards()}
 function editPin(b,p){askText({title:"Edit pin",value:p.t,ok:"Save",colors:{list:LED_COLORS,value:p.c||null},onOk:(v,c)=>{p.t=v;p.c=c;saveK();renderBoards()},del:{label:"Remove pin",onDel:()=>{b.pins=b.pins.filter(x=>x!==p);b.strings=(b.strings||[]).filter(s=>s.a!==p.id&&s.b!==p.id);saveK();renderBoards()}}})}
-function renderBoards(){
+function renderBoardsOld3(){
   ["cal","store","todo","shelf"].forEach(i=>$(i).hidden=true);const box=$("boards");box.hidden=false;
   const b=K.boards.find(x=>x.id===K.cur)||K.boards[0],sz=K.size||"m";
   const bar=`<div class="kbar">${K.boards.map(x=>`<button class="kb${b&&x.id===b.id?" on":""}" data-kb="${x.id}">${esc(x.name)}</button>`).join("")}<button id="kNew" aria-label="New board">+ New board</button></div>`;
@@ -827,7 +918,7 @@ function renderBoards(){
   const pins=(b.pins||[]).map(p=>`<div class="pinned${p.d?" done":""}" data-pn="${p.id}" style="left:${p.x*100}%;top:${p.y*100}%;--r:${rot(p.id)}deg"><i class="pin sm"></i><label class="gl"><input type="checkbox" data-pk="${p.id}" ${p.d?"checked":""} aria-label="Done"><span>${esc(p.t)}</span></label></div>`).join("");
   box.innerHTML=`${bar}<div class="top" style="margin-top:12px"><h3>${esc(b.name)}</h3><button id="kEdit">Rename or delete board</button></div><div class="board${K.full?" full":""}" data-size="${sz}"><div class="ktb"><button id="kAddPin"><i class="pin" style="width:14px;height:14px"></i>Add pin</button><button id="kAddArrow"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8H12" stroke="#1d2230" stroke-width="2"/><path d="M10 3L15 8L10 13Z" fill="#1d2230"/></svg>Add arrow</button><button id="kStr" class="${strMode?"on":""}" aria-pressed="${strMode}"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 11 Q8 1 15 11" stroke="${strMode?"#fff":"#7f8898"}" stroke-width="2" fill="none"/></svg>${strMode?"Done tying":"String"}</button><span class="ksz" role="group" aria-label="Board size">${["s","m","l"].map(s=>`<button data-sz="${s}" aria-label="Size ${s.toUpperCase()}" class="${sz===s?"on":""}">${s.toUpperCase()}</button>`).join("")}</span><button id="kFull">${K.full?"Exit full screen":"Full screen"}</button></div>${strMode?`<div class="khint">${strFrom?"Now tap the second pin.":"Tap a pin, then tap another pin to tie a string between them."}</div>`:""}<div class="kstage" id="kStage"><svg class="kstr"></svg><div class="kheads"></div>${pins}${arrowsHtml(b)}</div></div>`;
   wireK(box,b);wireArrows(box,b);drawStrings(box,b);applyWords()}
-function wireK(box,b){
+function wireKOld3(box,b){
   $("kNew").onclick=()=>askText({title:"New board",ph:"Board name",ok:"Create board",onOk:v=>{const nb=mkBoard(v);K.boards.push(nb);K.cur=nb.id;strMode=false;strFrom=null;saveK();renderBoards()}});
   box.querySelectorAll("[data-kb]").forEach(x=>x.onclick=()=>{K.cur=x.dataset.kb;strMode=false;strFrom=null;saveK();renderBoards()});
   if(!b)return;
@@ -900,7 +991,7 @@ function wireArrows(box,b){b.arrows=b.arrows||[];const stage=$("kStage");
 const LED_COLORS=[["Off (dead bulb)",null],["Red","#ff3b3b"],["Orange","#ff9f1a"],["Yellow","#ffd60a"],["Blue","#2e86ff"],["Purple","#a45bff"],["Pink","#ff5fa8"],["White","#ffffff"]];
 let xColor=null;
 function drawXCols(cs){const bx=$("xCols");bx.hidden=!cs;if(!cs){bx.innerHTML="";return}
-  bx.innerHTML=`<div style="width:100%;font-size:14px;color:var(--mute)">Light color</div>`+cs.list.map(([n,col])=>{const on=(xColor||"")===(col||"");return `<button type="button" data-xc="${col||""}" aria-label="${n}" aria-pressed="${on}" title="${n}" style="width:36px;height:36px;padding:0;border-radius:50%;background:${col||"#e4e8ee"};border:3px solid ${on?"var(--ink)":"transparent"};font-size:11px;color:#5b6475">${col?"":"off"}</button>`}).join("");
+  bx.innerHTML=`<div style="width:100%;font-size:14px;color:var(--mute)">${cs.label||"Light color"}</div>`+cs.list.map(([n,col])=>{const on=(xColor||"")===(col||"");return `<button type="button" data-xc="${col||""}" aria-label="${n}" aria-pressed="${on}" title="${n}" style="width:36px;height:36px;padding:0;border-radius:50%;background:${col||"#e4e8ee"};border:3px solid ${on?"var(--ink)":"transparent"};box-shadow:inset 0 0 0 1px rgba(0,0,0,.25);font-size:11px;color:#5b6475">${col?"":"off"}</button>`}).join("");
   bx.querySelectorAll("[data-xc]").forEach(b=>b.onclick=()=>{xColor=b.dataset.xc||null;drawXCols(cs)})}
 function bulb(c,d){const col=d?"#2ecc71":c,base="";
   if(!col)return `<svg width="22" height="30" viewBox="0 0 22 30" aria-hidden="true"><circle cx="11" cy="11" r="9" fill="#e4e8ee" fill-opacity=".85" stroke="#9aa3b2" stroke-width="1.5"/><path d="M8 17V13l1.5-2 1.5 2 1.5-2 1.5 2v4" fill="none" stroke="#6b7384" stroke-width="1" stroke-dasharray="2 1.5"/>${base}</svg>`;
@@ -910,15 +1001,180 @@ function drawStrings(box,b){const stage=$("kStage"),svg=stage&&stage.querySelect
   const dn=id=>!!(b.pins||[]).find(p=>p.id===id&&p.d);
   svg.innerHTML=(b.strings||[]).map(s=>{const A=pos(s.a),B=pos(s.b);if(!A||!B)return"";const M={x:(A.x+B.x)/2,y:(A.y+B.y)/2};
     return `<g data-sid="${s.id}"><path d="M${A.x},${A.y}L${B.x},${B.y}" class="shit"/><path d="M${A.x},${A.y}L${M.x},${M.y}" class="sline${dn(s.a)?" g":""}"/><path d="M${M.x},${M.y}L${B.x},${B.y}" class="sline${dn(s.b)?" g":""}"/></g>`}).join("");
-  if(hd)hd.innerHTML=(b.pins||[]).concat(b.arrows||[]).map(p=>{const A=pos(p.id);return A?`<span class="hd" style="left:${A.x-11}px;top:${A.y-11}px">${bulb(p.c,p.d)}</span>`:""}).join("")}
+  if(hd)hd.innerHTML=(b.pins||[]).map(p=>{const A=pos(p.id);return A?`<span class="hd" style="left:${A.x-8}px;top:${A.y-8}px">${bulb(p.c,p.d)}</span>`:""}).join("")}
+let openComp=null;
+P.comps=P.comps||[];
+const BG_COLORS=[["White","#ffffff"],["Cream","#fff8e7"],["Grey","#eef0f4"],["Blue","#e8f1ff"],["Green","#e9f7ec"],["Pink","#fdecf2"],["Slate","#2b3140"]];
+const isDarkBg=c=>{const h=(c||"#ffffff").replace("#",""),r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),bl=parseInt(h.slice(4,6),16);return (r*299+g*587+bl*114)/1000<128};
+function boardPct(b){const n=(b.pins||[]).length;return n?Math.round(b.pins.filter(p=>p.d).length/n*100):0}
+function destOptions(){const o=[["Projects calendar","cal:projects"],["Learning topics calendar","cal:learning"],["Shelf: Pads","shelf:pads"],["Shelf: Project logs","shelf:projects"],["Shelf: Learning logs","shelf:learning"],["Shelf: Completions","shelf:completions"]];K.boards.forEach(x=>o.push(["Board: "+x.name,"board:"+x.id]));return o}
+function goTo(d){const i=d.indexOf(":"),t=d.slice(0,i),v=d.slice(i+1);
+  if(t==="cal"){switchPage(v);return}
+  if(t==="shelf"){shelfTab=v;openLog=null;openPad=null;openComp=null;switchPage("shelf");return}
+  if(t==="board"){if(K.boards.find(x=>x.id===v)){K.cur=v;saveK()}strMode=false;strFrom=null;switchPage("boards")}}
+function dupBoard(b){const m={},nb=JSON.parse(JSON.stringify(b));nb.id=nid();nb.name=b.name+" copy";
+  (nb.pins||[]).forEach(p=>{const o=p.id;p.id=nid();m[o]=p.id});
+  nb.strings=(nb.strings||[]).filter(s=>m[s.a]&&m[s.b]).map(s=>({id:nid(),a:m[s.a],b:m[s.b]}));
+  (nb.texts||[]).forEach(t=>{t.id=nid()});(nb.shorts||[]).forEach(s=>{s.id=nid()});nb.arrows=[];return nb}
+function cleanBoard(b){const st=$("kStage"),sw=st.clientWidth||600,sh=st.clientHeight||400,ids=new Set((b.pins||[]).map(p=>p.id)),seen=new Set();
+  b.strings=(b.strings||[]).filter(s=>{const k=[s.a,s.b].sort().join("|");if(!ids.has(s.a)||!ids.has(s.b)||s.a===s.b||seen.has(k))return false;seen.add(k);return true});
+  b.texts=(b.texts||[]).filter(t=>t.t&&t.t.trim());b.arrows=[];
+  const items=[...(b.pins||[]).slice().sort((p,q)=>p.y-q.y||p.x-q.x),...b.texts,...(b.shorts||[])],cw=170,rh=84,cols=Math.max(1,Math.floor((sw-12)/cw));
+  items.forEach((it,i)=>{it.x=(12+(i%cols)*cw)/sw;it.y=Math.min(.94,(14+Math.floor(i/cols)*rh)/sh)})}
+function medal(pct){const col=pct>=100?"#f1c40f":pct>=50?"#b8c0cc":"#cd7f32",rb=pct>=100?"#c0392b":"#2e86ff";
+  return `<svg width="30" height="40" viewBox="0 0 30 40" aria-hidden="true"><path d="M7 0h6l4 12H9z" fill="${rb}"/><path d="M23 0h-6l-4 12h8z" fill="${rb}" fill-opacity=".8"/><circle cx="15" cy="26" r="11" fill="${col}" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/><path d="M15 19l2.2 4.6 5 .6-3.7 3.4 1 5-4.5-2.5-4.5 2.5 1-5-3.7-3.4 5-.6z" fill="#fff" fill-opacity=".85"/></svg>`}
+const imgSrc=c=>"data:image/svg+xml;charset=utf-8,"+encodeURIComponent(c.svg);
+function boardSvg(b,w,h){const st=$("kStage"),dark=isDarkBg(b.bg),ink=dark?"#f2f4f8":"#1d2230";
+  const wrap=(t,n)=>{const out=[];let cur="";String(t).split(/\s+/).forEach(wd=>{if(cur&&(cur+" "+wd).length>n){out.push(cur);cur=wd}else cur=cur?cur+" "+wd:wd});if(cur)out.push(cur);return out.slice(0,8)};
+  const pos=id=>{const el=st.querySelector(`[data-pn="${id}"]`);return el?{x:el.offsetLeft+el.offsetWidth/2,y:el.offsetTop}:null};
+  const dn=id=>!!(b.pins||[]).find(p=>p.id===id&&p.d);let strs="",cards="",bulbs="";
+  (b.strings||[]).forEach(s=>{const A=pos(s.a),B=pos(s.b);if(!A||!B)return;const M={x:(A.x+B.x)/2,y:(A.y+B.y)/2};strs+=`<path d="M${A.x},${A.y}L${M.x},${M.y}" stroke="${dn(s.a)?"#27ae60":"#7f8898"}" stroke-width="3" stroke-linecap="round"/><path d="M${M.x},${M.y}L${B.x},${B.y}" stroke="${dn(s.b)?"#27ae60":"#7f8898"}" stroke-width="3" stroke-linecap="round"/>`});
+  (b.pins||[]).forEach(p=>{const el=st.querySelector(`[data-pn="${p.id}"]`);if(!el)return;const x=el.offsetLeft,y=el.offsetTop,wd=el.offsetWidth,ht=el.offsetHeight,lines=wrap(p.t,Math.max(6,Math.floor((wd-34)/6.8))),cx=x+wd/2,fill=p.d?"#2ecc71":(p.c||"#cfd4de");
+    cards+=`<rect x="${x}" y="${y}" width="${wd}" height="${ht}" rx="8" fill="#fff" stroke="#e3e6ee"/><rect x="${x+8}" y="${y+14}" width="11" height="11" rx="2" fill="${p.d?"#2ecc71":"#fff"}" stroke="#8a93a3"/>${p.d?`<path d="M${x+10} ${y+19.5}l2.6 2.6 4.4-5" fill="none" stroke="#fff" stroke-width="1.8"/>`:""}${lines.map((l,i)=>`<text x="${x+25}" y="${y+23+i*15}" font-size="12.5" fill="#1d2230" opacity="${p.d?.55:1}">${esc(l)}</text>`).join("")}`;
+    bulbs+=`<circle cx="${cx}" cy="${y}" r="6.5" fill="${fill}" stroke="rgba(0,0,0,.35)" stroke-width="1.2"/>${p.d?`<path d="M${cx-3} ${y} l2.2 2.2 4-4.4" fill="none" stroke="#fff" stroke-width="1.8"/>`:""}`});
+  (b.texts||[]).forEach(t=>{const el=st.querySelector(`[data-tx="${t.id}"]`);if(!el)return;cards+=wrap(t.t,Math.max(8,Math.floor(34*15/(t.sz||15)))).map((l,i)=>`<text x="${el.offsetLeft+4}" y="${el.offsetTop+(t.sz||15)+2+i*(t.sz||15)*1.35}" font-size="${t.sz||15}" fill="${ink}">${esc(l)}</text>`).join("")});
+  (b.shorts||[]).forEach(s=>{const el=st.querySelector(`[data-sc="${s.id}"]`);if(!el)return;cards+=`<rect x="${el.offsetLeft}" y="${el.offsetTop}" width="${el.offsetWidth}" height="${el.offsetHeight}" rx="${el.offsetHeight/2}" fill="#eef3ff" stroke="#b7c9f5"/><text x="${el.offsetLeft+12}" y="${el.offsetTop+el.offsetHeight/2+4.5}" font-size="13" fill="#1d3d8f">&#8599; ${esc(s.t)}</text>`});
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" font-family="system-ui,-apple-system,Segoe UI,sans-serif"><rect width="${w}" height="${h}" fill="${b.bg||"#ffffff"}"/>${b.back?strs+cards:cards+strs}${bulbs}</svg>`}
+function exportBoard(b){const st=$("kStage"),w=st.clientWidth,h=st.clientHeight,pct=boardPct(b);
+  P.comps.unshift({id:nid(),name:b.name,pct,svg:boardSvg(b,w,h),w,h,date:new Date().toISOString(),ann:[]});saveP();return pct}
+function dragObj(el,o,stage,box,b,onTap){el.onpointerdown=e=>{if(e.target.closest("input,.sed"))return;
+  const sr=stage.getBoundingClientRect(),er=el.getBoundingClientRect(),ox=e.clientX-er.left,oy=e.clientY-er.top,sx=e.clientX,sy=e.clientY;let moved=false;
+  el.setPointerCapture(e.pointerId);el.classList.add("drag");
+  const mv=ev=>{if(Math.abs(ev.clientX-sx)+Math.abs(ev.clientY-sy)>5)moved=true;if(!moved)return;
+    let x=ev.clientX-sr.left-ox,y=ev.clientY-sr.top-oy;x=Math.max(0,Math.min(x,sr.width-el.offsetWidth));y=Math.max(0,Math.min(y,sr.height-el.offsetHeight));
+    el.style.left=x+"px";el.style.top=y+"px";o.x=x/sr.width;o.y=y/sr.height;drawStrings(box,b)};
+  const up=ev=>{el.removeEventListener("pointermove",mv);el.removeEventListener("pointerup",up);el.removeEventListener("pointercancel",up);el.classList.remove("drag");saveK();if(!moved&&ev.type==="pointerup")onTap()};
+  el.addEventListener("pointermove",mv);el.addEventListener("pointerup",up);el.addEventListener("pointercancel",up)}}
+function renderBoards(){
+  ["cal","store","todo","shelf"].forEach(i=>$(i).hidden=true);const box=$("boards");box.hidden=false;
+  const b=K.boards.find(x=>x.id===K.cur)||K.boards[0],sz=K.size||"m";
+  const bar=`<div class="kbar">${K.boards.map(x=>`<button class="kb${b&&x.id===b.id?" on":""}" data-kb="${x.id}">${esc(x.name)}</button>`).join("")}<button id="kNew" aria-label="New board">+ New board</button></div>`;
+  if(!b){box.innerHTML=bar+`<div class="empty" style="margin-top:12px">No boards yet. Tap + New board to make your first one.</div>`;wireK(box,null);applyWords();return}
+  K.cur=b.id;b.pins=b.pins||[];b.texts=b.texts||[];b.shorts=b.shorts||[];b.strings=b.strings||[];
+  const pct=boardPct(b),dn=b.pins.filter(p=>p.d).length,dark=isDarkBg(b.bg);
+  const pins=b.pins.map(p=>`<div class="pinned${p.d?" done":""}" data-pn="${p.id}" style="left:${p.x*100}%;top:${p.y*100}%"><label class="gl"><input type="checkbox" data-pk="${p.id}" ${p.d?"checked":""} aria-label="Done"><span>${esc(p.t)}</span></label></div>`).join("");
+  const texts=b.texts.map(t=>`<div class="btext${dark?" dk":""}" data-tx="${t.id}" style="left:${t.x*100}%;top:${t.y*100}%;font-size:${t.sz||15}px">${t.h?safeHtml(t.h):esc(t.t)}</div>`).join("");
+  const shorts=b.shorts.map(s=>`<div class="bshort" data-sc="${s.id}" style="left:${s.x*100}%;top:${s.y*100}%"><span>&#8599; ${esc(s.t)}</span><button class="sed" aria-label="Edit shortcut ${esc(s.t)}">&#9998;</button></div>`).join("");
+  box.innerHTML=`${bar}<div class="top" style="margin-top:12px"><h3>${esc(b.name)}</h3><span class="row" style="margin:0"><button id="kDup">Duplicate board</button><button id="kEdit">Rename or delete</button></span></div><div class="board${K.full?" full":""}" data-size="${sz}" style="background:${b.bg||"#fff"}"><div class="ktb"><button id="kAddPin">+ Pin</button><button id="kAddText">T Text</button><button id="kAddShort">&#8599; Shortcut</button><span class="sep"></span><button id="kStr" class="${strMode?"on":""}" aria-pressed="${strMode}">${strMode?"Done tying":"String"}</button><button id="kLayer" title="Put strings in front of or behind the cards">Strings: ${b.back?"back":"front"}</button><span class="sep"></span><button id="kBg">Background</button><button id="kClean">Clean up</button><button id="kExport">Export</button><span class="sep"></span><span class="ksz" role="group" aria-label="Board size">${["s","m","l"].map(s=>`<button data-sz="${s}" aria-label="Size ${s.toUpperCase()}" class="${sz===s?"on":""}">${s.toUpperCase()}</button>`).join("")}</span><button id="kFull">${K.full?"Exit full screen":"Full screen"}</button></div><div class="kprog" role="progressbar" aria-label="Board progress" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><div class="kpt"><div class="kpf" style="width:${pct}%"></div></div><span>${pct}%</span></div>${strMode?`<div class="khint">${strFrom?"Now tap the second pin.":"Tap a pin, then tap another pin to tie a string between them."}</div>`:""}<div class="kstage" id="kStage"><svg class="kstr" style="z-index:${b.back?3:10}"></svg><div class="kheads"></div>${pins}${texts}${shorts}</div></div>`;
+  wireK(box,b);drawStrings(box,b);applyWords()}
+function wireK(box,b){
+  $("kNew").onclick=()=>askText({title:"New board",ph:"Board name",ok:"Create board",onOk:v=>{const nb=mkBoard(v);K.boards.push(nb);K.cur=nb.id;strMode=false;strFrom=null;saveK();renderBoards()}});
+  box.querySelectorAll("[data-kb]").forEach(x=>x.onclick=()=>{K.cur=x.dataset.kb;strMode=false;strFrom=null;saveK();renderBoards()});
+  if(!b)return;
+  $("kEdit").onclick=()=>askText({title:"Rename board",value:b.name,onOk:v=>{b.name=v;saveK();renderBoards()},del:{label:"Delete board",warn:"This removes the board, its pins, text, shortcuts and strings.",onDel:()=>{K.boards=K.boards.filter(x=>x!==b);K.cur=null;strMode=false;strFrom=null;saveK();renderBoards()}}});
+  $("kDup").onclick=()=>{const nb=dupBoard(b);K.boards.push(nb);K.cur=nb.id;strMode=false;strFrom=null;saveK();renderBoards()};
+  $("kFull").onclick=()=>{K.full=!K.full;renderBoards()};
+  $("kStr").onclick=()=>{strMode=!strMode;strFrom=null;renderBoards()};
+  $("kLayer").onclick=()=>{b.back=!b.back;saveK();renderBoards()};
+  box.querySelectorAll("[data-sz]").forEach(x=>x.onclick=()=>{K.size=x.dataset.sz;saveK();renderBoards()});
+  $("kAddPin").onclick=()=>askText({title:"Name your pin",ph:"A goal or reminder",ok:"Add pin",colors:{list:LED_COLORS,value:null},onOk:(v,c)=>{const n=b.pins.length;b.pins.push({id:nid(),t:v,c:c,d:false,x:.04+(n%5)*.17,y:.06+(Math.floor(n/5)%4)*.2});saveK();renderBoards()}});
+  $("kAddText").onclick=()=>openText(b,null);
+  $("kAddShort").onclick=()=>askText({title:"New shortcut",ph:"Label, for example Calendar",ok:"Add shortcut",select:{options:destOptions(),value:"cal:projects"},onOk:(v,c,sel)=>{const n=b.shorts.length;b.shorts.push({id:nid(),t:v,to:sel||"cal:projects",x:.55+(n%3)*.14,y:.04+(Math.floor(n/3)%4)*.09});saveK();renderBoards()}});
+  $("kBg").onclick=()=>askText({title:"Board background",noText:true,ok:"Done",colors:{list:BG_COLORS,value:b.bg||"#ffffff",label:"Background color"},onOk:(v,c)=>{b.bg=c||"#ffffff";saveK();renderBoards()}});
+  $("kClean").onclick=()=>askText({title:"Clean up this board?",noText:true,ok:"Clean up",msg:"This arranges pins, text and shortcuts into a tidy grid, and removes broken or duplicate strings and empty text. It can't be undone.",onOk:()=>{cleanBoard(b);saveK();renderBoards()}});
+  $("kExport").onclick=()=>{const pct=exportBoard(b);askText({title:"Exported to Completions",noText:true,ok:"Go to Completions",msg:`"${b.name}" was saved at ${pct}% complete, with a medal pin. Open Completions to see it.`,onOk:()=>goTo("shelf:completions")})};
+  box.querySelectorAll("[data-pk]").forEach(c=>c.onchange=()=>{b.pins.find(p=>p.id===c.dataset.pk).d=c.checked;saveK();renderBoards()});
+  const stage=$("kStage");
+  stage.querySelector(".kstr").addEventListener("click",e=>{const g=e.target.closest("[data-sid]");if(!g)return;const s=(b.strings||[]).find(x=>x.id===g.dataset.sid);if(!s)return;
+    askText({title:"Remove string",noText:true,ok:"Close",onOk:()=>{},del:{label:"Remove string",onDel:()=>{b.strings=b.strings.filter(x=>x!==s);saveK();renderBoards()}}})});
+  box.querySelectorAll(".pinned").forEach(el=>{const p=b.pins.find(x=>x.id===el.dataset.pn);el.onclick=e=>{if(!e.target.closest("input"))e.preventDefault()};dragObj(el,p,stage,box,b,()=>{if(strMode)tie(b,p,el);else editPin(b,p)})});
+  box.querySelectorAll(".btext").forEach(el=>{const t=b.texts.find(x=>x.id===el.dataset.tx);dragObj(el,t,stage,box,b,()=>openText(b,t))});
+  box.querySelectorAll(".bshort").forEach(el=>{const s=b.shorts.find(x=>x.id===el.dataset.sc);
+    el.querySelector(".sed").onclick=e=>{e.stopPropagation();askText({title:"Edit shortcut",value:s.t,select:{options:destOptions(),value:s.to},onOk:(v,c,sel)=>{s.t=v;s.to=sel||s.to;saveK();renderBoards()},del:{label:"Delete shortcut",onDel:()=>{b.shorts=b.shorts.filter(x=>x!==s);saveK();renderBoards()}}})};
+    dragObj(el,s,stage,box,b,()=>goTo(s.to))});
+}
+const subTabs=()=>{const lg=shelfTab==="projects"||shelfTab==="learning";if(lg)lastLogs=shelfTab;
+  return `<div class="tabs sub" role="tablist"><button role="tab" aria-selected="${shelfTab==="pads"}" data-st="pads" class="${shelfTab==="pads"?"on":""}">Pads</button><button role="tab" aria-selected="${lg}" data-st="${lg?shelfTab:(lastLogs||(page==="learning"?"learning":"projects"))}" class="${lg?"on":""}">Logs</button><button role="tab" aria-selected="${shelfTab==="completions"}" data-st="completions" class="${shelfTab==="completions"?"on":""}">Completions</button>${lg?`<div class="sw" role="switch" tabindex="0" aria-checked="${shelfTab==="learning"}" aria-label="Switch between Project logs and Learning logs" data-on="${shelfTab==="learning"?1:0}" data-st="${shelfTab==="learning"?"projects":"learning"}"><span class="${shelfTab==="projects"?"on":""}">Projects</span><span class="${shelfTab==="learning"?"on":""}">Learning</span></div>`:""}</div>`};
+function renderCompletions(box){const comps=P.comps||[];
+  if(openComp){const c=comps.find(x=>x.id===openComp);if(c){renderComp(box,c);return}openComp=null}
+  const dt=c=>new Date(c.date).toLocaleDateString("default",{month:"short",day:"numeric",year:"numeric"});
+  box.innerHTML=`${subTabs()}<div class="empty" style="margin:6px 0 10px">${comps.length?"Boards you exported, pinned up with a medal. Tap one to view it and add annotations.":"No completions yet. Open a board on the Boards tab and press Export to pin it here."}</div><div class="cboard"><div class="cgrid">${comps.map(c=>`<button class="ctile" data-co="${c.id}"><span class="cmedal">${medal(c.pct)}</span><img src="${imgSrc(c)}" alt="Screenshot of ${esc(c.name)}"><b>${esc(c.name)}</b><small>${c.pct}% complete &middot; ${dt(c)}</small></button>`).join("")}</div></div>`;
+  wireSub(box);box.querySelectorAll("[data-co]").forEach(x=>x.onclick=()=>{openComp=x.dataset.co;renderShelf()})}
+function renderComp(box,c){const d=new Date(c.date).toLocaleDateString("default",{month:"long",day:"numeric",year:"numeric"});
+  box.innerHTML=`<div class="top"><button id="cBack">&lsaquo; Completions</button><button id="cDel">Delete completion</button></div><div class="top" style="margin-top:12px;justify-content:flex-start;gap:12px">${medal(c.pct)}<div><h3>${esc(c.name)}</h3><div class="empty">${c.pct}% complete &middot; exported ${d}</div></div></div><div class="cimgwrap"><img class="cimg" src="${imgSrc(c)}" alt="Screenshot of board ${esc(c.name)}"></div>${annHtml(c.ann||[],"Read-only screenshot. You can add annotations below.")}`;
+  $("cBack").onclick=()=>{openComp=null;renderShelf()};
+  let sure=false;$("cDel").onclick=()=>{if(!sure){sure=true;$("cDel").textContent="Tap again to delete";return}P.comps=P.comps.filter(x=>x!==c);openComp=null;saveP();renderShelf()};
+  wireAnn(box,()=>c.ann||[],v=>{c.ann=v});applyWords()}
+function showSz(){if(!curCard)return;const s=curCard.sz||1;$("cSz").textContent=Math.round(s*100)+"%";$("cSm").disabled=s<=.1;$("cLg").disabled=false}
+function setSz(d){if(!curCard)return;curCard.sz=Math.max(.1,Math.round((curCard.sz||1)*(d>0?1.15:1/1.15)*100)/100);save();showSz()}
+$("cSm").onclick=()=>setSz(-.1);$("cLg").onclick=()=>setSz(.1);
+function drawBp(){const l=$("bpList");l.innerHTML=S.list.map(p=>`<div class="chip pick ${armed===p.id?"armed":""}" draggable="true" data-bp="${p.id}" style="border-left-color:${col(p)}"><span>${esc(p.name)}</span></div>`).join("")||'<div class="empty">No cards yet.</div>';
+  l.querySelectorAll("[data-bp]").forEach(el=>{el.ondragstart=e=>e.dataTransfer.setData("text/plain","p:"+el.dataset.bp);el.onclick=()=>{armed=armed===el.dataset.bp?null:el.dataset.bp;drawBp()}});$("bpCount").textContent="("+S.list.length+")"}
+function updateBp(){const cal=mode==="cal",t=cal&&$("cal").querySelector(".tray");let vis=true;if(t){const r=t.getBoundingClientRect();vis=r.bottom>0&&r.top<window.innerHeight}
+  const on=cal&&!vis;$("bpBtn").hidden=!on;if(!on)$("bpPanel").hidden=true;else if(!$("bpPanel").hidden)drawBp();else $("bpCount").textContent="("+S.list.length+")"}
+$("bpBtn").onclick=()=>{const p=$("bpPanel");p.hidden=!p.hidden;if(!p.hidden)drawBp()};
+$("bpClose").onclick=()=>{$("bpPanel").hidden=true};
+$("bpAdd").onclick=()=>{const p=$("plus");if(p)p.click()};
+window.addEventListener("scroll",updateBp,{passive:true});window.addEventListener("resize",updateBp);
+$("shelfBtn").onclick=()=>switchPage("shelf");
+let pasteSure=false,pendingPaste=null;
+function bkApply(o){autoSave(true);try{BK_KEYS.forEach(k=>{if(k in o.data)localStorage.setItem(k,o.data[k])});location.reload()}catch(e){bkMsg("Could not restore the backup.",false)}}
+$("bkPaste").onclick=async()=>{let txt="";
+  try{txt=await navigator.clipboard.readText()}catch(e){bkMsg("Could not read the clipboard. Open the text box below, paste your backup there, and press Restore from text.",false);document.querySelector("#bdlg details").open=true;return}
+  let o;try{o=JSON.parse(txt)}catch(e){bkMsg("The clipboard does not hold a Command Center backup. Copy a backup first, then try again.",false);return}
+  if(!o||o.app!=="project-desk"||!o.data){bkMsg("The clipboard does not hold a Command Center backup.",false);return}
+  if(!pasteSure){pasteSure=true;pendingPaste=o;$("bkPaste").textContent="Tap again to replace my data";bkMsg("Backup found from "+(o.saved?new Date(o.saved).toLocaleString():"an earlier time")+". This replaces the data on this device.",false);return}
+  bkApply(pendingPaste||o)};
+const AUTO_KEY="project-desk-autosave";
+function autoRead(){try{return JSON.parse(localStorage.getItem(AUTO_KEY))||[]}catch(e){return[]}}
+function autoSave(force){try{const list=autoRead();if(!force&&list[0]&&Date.now()-list[0].t<3600000)return;
+  const snap=bkMake();if(snap.length<200)return;
+  let used=0;Object.keys(localStorage).forEach(k=>{if(k!==AUTO_KEY)used+=k.length+(localStorage.getItem(k)||"").length});
+  let l=[{t:Date.now(),d:snap},...list].slice(0,3);
+  while(l.length&&used+JSON.stringify(l).length>1800000)l.pop();
+  if(l.length)localStorage.setItem(AUTO_KEY,JSON.stringify(l))}catch(e){}}
+function drawAuto(){const l=autoRead(),box=$("bkAuto");
+  box.innerHTML=l.length?`<div style="font-size:14px;color:var(--mute);margin-bottom:4px">Automatic saves on this device</div>`+l.map((a,i)=>`<div class="row" style="margin:6px 0 0;align-items:center;justify-content:space-between"><span>${esc(new Date(a.t).toLocaleString("default",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}))}</span><button data-ar="${i}">Restore</button></div>`).join(""):`<div class="empty">No automatic saves yet. The app saves a copy about once an hour.</div>`;
+  box.querySelectorAll("[data-ar]").forEach(b=>{let sure=false;b.onclick=()=>{if(!sure){sure=true;b.textContent="Tap again to restore";return}try{bkApply(JSON.parse(l[b.dataset.ar].d))}catch(e){bkMsg("Could not restore that save.",false)}}})}
+autoSave(false);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")autoSave(false)});window.addEventListener("pagehide",()=>autoSave(false));
+function wireSwitch(){const sw=$("tabs").querySelector(".sw");if(!sw)return;
+  const go=()=>{if(mode==="cal")switchPage(page==="learning"?"projects":"learning");else switchPage(page)};
+  sw.onclick=go;sw.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}}}
+let teCur=null,teB=null,teSize=15,teSure=false;
+function safeHtml(h){try{const d=new DOMParser().parseFromString("<body>"+h+"</body>","text/html");d.body.querySelectorAll("script,style,iframe,object,embed,link,meta,form,input,button,svg,img,video,audio").forEach(e=>e.remove());
+  d.body.querySelectorAll("*").forEach(e=>{[...e.attributes].forEach(a=>{const n=a.name.toLowerCase();if(n.startsWith("on")||!["style","color","size","face","align"].includes(n))e.removeAttribute(a.name);else if(n==="style"&&/url\(|expression|javascript:/i.test(a.value))e.removeAttribute(a.name)})});return d.body.innerHTML}catch(e){return esc(h)}}
+const TE_COLORS=["#1d2230","#c0392b","#d98c1f","#2e86ff","#27ae60","#8e44ad","#7f8898"];
+$("teCols").innerHTML=TE_COLORS.map(c=>`<button type="button" data-tc="${c}" aria-label="Text color ${c}" style="background:${c}"></button>`).join("");
+$("teTb").querySelectorAll("[data-k]").forEach(b=>{b.onmousedown=e=>e.preventDefault();b.onclick=()=>document.execCommand(b.dataset.k,false,null)});
+$("teCols").querySelectorAll("[data-tc]").forEach(b=>{b.onmousedown=e=>e.preventDefault();b.onclick=()=>document.execCommand("foreColor",false,b.dataset.tc)});
+function teSetSize(n){teSize=Math.max(8,Math.min(96,n));$("teEd").style.fontSize=teSize+"px";$("teSz").textContent=teSize+"px"}
+$("teSm").onmousedown=e=>e.preventDefault();$("teLg").onmousedown=e=>e.preventDefault();
+$("teSm").onclick=()=>teSetSize(teSize-2);$("teLg").onclick=()=>teSetSize(teSize+2);
+function openText(b,t){teB=b;teCur=t;teSure=false;$("teTitle").textContent=t?"Edit text":"Add text";$("teEd").innerHTML=t?(t.h?safeHtml(t.h):esc(t.t).replace(/\n/g,"<br>")):"";teSetSize(t&&t.sz||15);$("teDel").hidden=!t;$("teDel").textContent="Delete";$("tedlg").showModal();$("teEd").focus()}
+$("teOk").onclick=()=>{const h=safeHtml($("teEd").innerHTML.trim()),tx=$("teEd").innerText.trim();if(!tx){$("tedlg").close();return}
+  if(teCur){teCur.h=h;teCur.t=tx;teCur.sz=teSize}else{const n=teB.texts.length;teB.texts.push({id:nid(),t:tx,h:h,sz:teSize,x:.05+(n%4)*.2,y:.62+(Math.floor(n/4)%3)*.1})}
+  saveK();$("tedlg").close();renderBoards()};
+$("teCancel").onclick=()=>$("tedlg").close();
+$("teDel").onclick=()=>{if(!teSure){teSure=true;$("teDel").textContent="Tap again to delete";return}teB.texts=teB.texts.filter(x=>x!==teCur);saveK();$("tedlg").close();renderBoards()};
+let bk2Sure=false;
+function bk2Msg(t,ok){const m=$("bk2Msg");m.hidden=!t;m.textContent=t||"";m.style.color=ok?"var(--accent)":"#c0392b"}
+function bk2Reset(){bk2Sure=false;$("bk2Restore").textContent="Restore"}
+function bk2Parse(){try{const o=JSON.parse($("bk2Text").value);return o&&o.app==="project-desk"&&o.data?o:null}catch(e){return null}}
+function bk2Check(){const o=bk2Parse();if(!o){bk2Msg("That isn't a Command Center backup.",false);return null}bk2Msg("Backup from "+(o.saved?new Date(o.saved).toLocaleString():"an earlier time")+". Press Restore to use it.",true);return o}
+function drawAuto2(){const l=autoRead(),box=$("bk2Auto");
+  box.innerHTML=l.length?l.map((a,i)=>`<div class="row" style="margin:6px 0 0;align-items:center;justify-content:space-between"><span>${esc(new Date(a.t).toLocaleString("default",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}))}</span><button data-a2="${i}">Restore</button></div>`).join(""):`<div class="empty">None yet. The app keeps a copy about once an hour.</div>`;
+  box.querySelectorAll("[data-a2]").forEach(b=>{let sure=false;b.onclick=()=>{if(!sure){sure=true;b.textContent="Tap again";return}try{bkApply(JSON.parse(l[b.dataset.a2].d))}catch(e){bk2Msg("Could not restore that save.",false)}}})}
+function bk2Open(){bk2Reset();$("bk2Text").value=bkMake();bk2Msg("");drawAuto2();$("bdlg2").showModal()}
+$("bkBtn").onclick=bk2Open;
+$("bk2Close").onclick=()=>$("bdlg2").close();
+$("bk2Text").oninput=()=>{bk2Reset();bk2Msg("")};
+$("bk2Copy").onclick=async()=>{const t=$("bk2Text");t.value=bkMake();bk2Reset();let ok=false;
+  try{await navigator.clipboard.writeText(t.value);ok=true}catch(e){}
+  if(!ok){t.focus();t.select();t.setSelectionRange(0,t.value.length);try{ok=document.execCommand("copy")}catch(e){}}
+  bk2Msg(ok?"Copied. Paste it somewhere safe.":"Couldn't copy automatically. The text is selected: press and hold it, then tap Copy.",ok)};
+$("bk2Paste").onclick=async()=>{bk2Reset();const t=$("bk2Text");let txt="";
+  try{txt=await navigator.clipboard.readText()}catch(e){}
+  if(!txt){t.value="";t.focus();bk2Msg("Couldn't read the clipboard. Press and hold the box above and tap Paste.",false);return}
+  t.value=txt;bk2Check()};
+$("bk2Restore").onclick=()=>{const o=bk2Check();if(!o)return;if(!bk2Sure){bk2Sure=true;$("bk2Restore").textContent="Tap again";bk2Msg("This replaces the data on this device with the backup. Tap Restore again to confirm.",false);return}bkApply(o)};
 function dayHtml(dt,today,other){const k=ymd(dt);
   const es=dayCards(k);
   const lbl=(focusWeek?dt.toLocaleDateString("default",{weekday:"short"})+" ":"")+(dt.getDate()===1?dt.toLocaleString("default",{month:"short"})+" 1":dt.getDate());
-  return `<div class="day ${other?"other":""} ${k===today?"today":""}" data-d="${k}" data-wkk="${ymd(new Date(dt.getFullYear(),dt.getMonth(),dt.getDate()-dt.getDay()))}"><div class="dn">${lbl}</div>${es}</div>`}
+  return `<div class="day ${other?"other":""} ${k===today?"today":""}" data-d="${k}" data-wkk="${ymd(new Date(dt.getFullYear(),dt.getMonth(),dt.getDate()-(dt.getDay()+6)%7))}"><div class="dn">${lbl}</div>${es}</div>`}
 function place(t,id,date){date=date||null;if(t==="p")S.cal.push({id:nid(),pid:id,date,tasks:[]});else{const e=S.cal.find(x=>x.id===id);if(e)e.date=date}armed=null;save();render()}
 function renderStore(){
   const st=S.cal.filter(e=>!e.date&&S.list.find(p=>p.id===e.pid)),box=$("store");
-  box.innerHTML=`<h3>Card storage</h3><div class="empty" style="margin:4px 0 10px">Drop a card here to store it with its tasks. Drag it back onto a day, or tap it and choose a day.</div><div class="stash">${st.map(e=>{const p=S.list.find(x=>x.id===e.pid),t=e.tasks||[];return `<div class="chip sc" draggable="true" data-e="${e.id}" style="border-left-color:${col(p)}"><span data-edit="${e.id}"><b>${esc(p.name)}</b>${t.slice(0,5).map(x=>`<small class="tk ${x.d?"done":""}">${esc(x.t)}</small>`).join("")||'<small class="tk">Tap to add tasks</small>'}${t.length>5?`<small class="tk">+${t.length-5} more</small>`:""}</span><button class="ghost" data-rm="${e.id}" aria-label="Delete card">&times;</button></div>`}).join("")||'<div class="empty">Nothing stored yet.</div>'}</div>`;
+  box.innerHTML=`<h3>Card storage</h3><div class="empty" style="margin:4px 0 10px">Drop a card here to store it with its tasks. Drag it back onto a day, or tap it and choose a day.</div><div class="stash">${st.map(e=>{const p=S.list.find(x=>x.id===e.pid),t=e.tasks||[];return `<div class="chip sc" draggable="true" data-e="${e.id}" style="border-left-color:${col(p)}${e.sz&&e.sz!==1?";--ts:"+e.sz:""}"><span data-edit="${e.id}"><b>${esc(p.name)}</b>${t.slice(0,5).map(x=>`<small class="tk tkb ${x.d?"done":""}">${esc(x.t)}</small>`).join("")||'<small class="tk">Tap to add tasks</small>'}${t.length>5?`<small class="tk">+${t.length-5} more</small>`:""}</span><button class="ghost" data-rm="${e.id}" aria-label="Delete card">&times;</button></div>`}).join("")||'<div class="empty">Nothing stored yet.</div>'}</div>`;
   box.ondragover=e=>{e.preventDefault();box.classList.add("over")};
   box.ondragleave=()=>box.classList.remove("over");
   box.ondrop=e=>{e.preventDefault();box.classList.remove("over");const [t,id]=e.dataTransfer.getData("text/plain").split(":");if(t&&id)place(t,id,null)};
@@ -959,7 +1215,7 @@ $("mDel").onclick=()=>{
   S.list=S.list.filter(p=>p.id!==editing.id);S.cal=S.cal.filter(e=>e.pid!==editing.id);if(armed===editing.id)armed=null;save();$("mdlg").close();render();
 };
 
-function openCard(id){curCard=S.cal.find(x=>x.id===id);if(!curCard)return;const p=S.list.find(x=>x.id===curCard.pid);curCard.tasks=curCard.tasks||[];$("cTitle").textContent=p.name;$("cDay").value=curCard.date||"";$("cLogMsg").textContent="";drawCard();if(!$("cdlg").open)$("cdlg").showModal();$("cNew").focus()}
+function openCard(id){curCard=S.cal.find(x=>x.id===id);if(!curCard)return;const p=S.list.find(x=>x.id===curCard.pid);curCard.tasks=curCard.tasks||[];$("cTitle").textContent=p.name;$("cDay").value=curCard.date||"";showSz();$("cLogMsg").textContent="";drawCard();if(!$("cdlg").open)$("cdlg").showModal();$("cNew").focus()}
 function drawCard(){const c=curCard,box=$("cTasks");
   box.innerHTML=c.tasks.map((x,i)=>`<div class="act ${x.d?"done":""}"><input type="checkbox" data-ci="${i}" ${x.d?"checked":""} aria-label="Done"><span>${esc(x.t)}</span><button class="ghost" data-cd="${i}" aria-label="Remove task">&times;</button></div>`).join("")||'<div class="empty">No tasks yet. Add what you will do on this day.</div>';
   box.querySelectorAll("[data-ci]").forEach(el=>el.onchange=()=>{const tk=c.tasks[el.dataset.ci];tk.d=el.checked;logTask(c,tk,el.checked);save();drawCard()});
@@ -978,7 +1234,7 @@ function showWeeks(k){const box=$("nWeeks");$("nExpRow").hidden=!k.startsWith("m
   if(!k.startsWith("m:")){box.hidden=true;box.innerHTML="";return}
   const [yy,mm]=k.slice(2).split("-").map(Number),first=new Date(yy,mm-1,1),last=new Date(yy,mm,0);
   let h="";
-  for(let d=new Date(yy,mm-1,1-first.getDay());d<=last;d.setDate(d.getDate()+7)){const n=(S.notes||{})[ymd(d)]||"";if(!wedIn(d,yy,mm)||!plain(n).trim())continue;h+=`<div class="wlog"><b>${weekLabel(ymd(d))}</b><div>${toHtml(n)}</div></div>`}
+  for(let d=new Date(yy,mm-1,1-(first.getDay()+6)%7);d<=last;d.setDate(d.getDate()+7)){const n=(S.notes||{})[ymd(d)]||"";if(!wedIn(d,yy,mm)||!plain(n).trim())continue;h+=`<div class="wlog"><b>${weekLabel(ymd(d))}</b><div>${toHtml(n)}</div></div>`}
   box.hidden=false;box.innerHTML=`<h3 style="font-size:16px;margin:0 0 8px">Weekly logs this month</h3>${h||'<div class="empty">No weekly logs yet this month.</div>'}`}
 function openNotes(k){wkKey=k;S.notes=S.notes||{};setLogTitle(k);$("nText").innerHTML=toHtml(S.notes[k]||"");showWeeks(k);if(!$("ndlg").open)$("ndlg").showModal();$("nText").focus()}
 const toHtml=s=>/<[a-z][\s\S]*>/i.test(s)?s:esc(s).replace(/\n/g,"<br>");
