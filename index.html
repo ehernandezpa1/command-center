@@ -319,11 +319,24 @@ div.lined[contenteditable="false"] input[type=checkbox]{pointer-events:none}
 #teCols{display:inline-flex;gap:4px;align-items:center;padding:0 4px}
 #teCols button{width:22px;height:22px;min-width:0;padding:0;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.3)}
 #teSz{font-size:13px;color:var(--mute);min-width:36px;text-align:center;align-self:center}
+input[type=email],input[type=password]{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+input[type=email]:focus,input[type=password]:focus{outline:2px solid var(--accent);outline-offset:1px}
+#syncBtn{position:relative;display:inline-flex;align-items:center;padding:8px 10px}
+#syncBtn .sdot{position:absolute;right:4px;top:4px;width:9px;height:9px;border-radius:50%;background:transparent;border:2px solid var(--surface)}
+#syncBtn[data-s=synced] .sdot{background:#2ecc71}
+#syncBtn[data-s=syncing] .sdot{background:#2e86ff;animation:syp 1s ease-in-out infinite}
+#syncBtn[data-s=pending] .sdot{background:#2e86ff}
+#syncBtn[data-s=offline] .sdot{background:#9aa3b2}
+#syncBtn[data-s=error] .sdot{background:#c0392b}
+#syncBtn[data-s=decide] .sdot{background:#ff9f1a}
+#syncBtn[data-s=signedout] .sdot,#syncBtn[data-s=nolib] .sdot{background:#9aa3b2}
+@keyframes syp{50%{opacity:.3}}
+@media(prefers-reduced-motion:reduce){#syncBtn[data-s=syncing] .sdot{animation:none}}
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="top" style="align-items:flex-start"><div class="tabs" id="tabs" role="tablist" style="flex:1;min-width:0"></div><span class="row" style="margin:0"><button id="shelfBtn" class="shelfbtn">Shelf</button><button id="bkBtn" title="Save a backup" aria-label="Save or restore a backup"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h11l3 3v15H5z"/><path d="M8 3v5h7V3"/><rect x="8" y="13" width="8" height="8"/></svg></button></span></div>
+  <div class="top" style="align-items:flex-start"><div class="tabs" id="tabs" role="tablist" style="flex:1;min-width:0"></div><span class="row" style="margin:0"><button id="shelfBtn" class="shelfbtn">Shelf</button><button id="syncBtn" title="Sync" aria-label="Sync"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg><i class="sdot"></i></button><button id="bkBtn" title="Save a backup" aria-label="Save or restore a backup"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h11l3 3v15H5z"/><path d="M8 3v5h7V3"/><rect x="8" y="13" width="8" height="8"/></svg></button></span></div>
   <section class="cal" id="cal"></section>
   <section class="cal" id="store" style="margin-top:16px"></section>
   <section class="cal" id="todo" hidden></section>
@@ -361,10 +374,33 @@ div.lined[contenteditable="false"] input[type=checkbox]{pointer-events:none}
   </div>
 </dialog>
 
+<dialog id="sdlg">
+  <div class="top"><h2 style="margin:0;font-size:22px">Sync</h2><button class="ghost" id="sClose" aria-label="Close">&times;</button></div>
+  <div class="empty" id="sStatus" style="margin:8px 0 12px"></div>
+  <div id="sOut" hidden>
+    <label for="sEmail" style="font-size:14px;color:var(--mute)">Email</label>
+    <input type="email" id="sEmail" autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false" style="margin:6px 0 10px">
+    <label for="sPass" style="font-size:14px;color:var(--mute)">Password</label>
+    <input type="password" id="sPass" autocomplete="current-password" style="margin:6px 0 10px">
+    <div class="warn" id="sErr" hidden></div>
+    <div class="row"><button class="primary" id="sSignIn" style="flex:1">Sign in</button></div>
+  </div>
+  <div id="sIn" hidden>
+    <div class="row"><button id="sNow" style="flex:1">Sync now</button><button id="sOutBtn" style="flex:1">Sign out</button></div>
+  </div>
+  <div id="sDecide" hidden style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line)">
+    <div id="sDLines"></div>
+    <div class="empty" id="sDHint" style="margin:8px 0"></div>
+    <label class="act" style="border:0"><input type="checkbox" id="sBk"><span>I saved a backup (Backup window, then Copy)</span></label>
+    <div class="warn" id="sDErr"></div>
+    <div class="row" id="sDBtns"></div>
+  </div>
+</dialog>
+
 <dialog id="bdlg2">
   <div class="top"><h2 style="margin:0;font-size:22px">Backup</h2><button class="ghost" id="bk2Close" aria-label="Close">&times;</button></div>
   <div class="empty" style="margin:6px 0 8px">Copy saves your data to the clipboard. To restore, press Paste, then Restore.</div>
-  <textarea id="bk2Text" rows="5" style="font-size:12px" aria-label="Backup text" placeholder="Backup text appears here"></textarea>
+  <textarea id="bk2Text" rows="5" style="font-size:12px" aria-label="Backup text" placeholder="Press Copy to save a backup, or Paste to restore one"></textarea>
   <div class="warn" id="bk2Msg" hidden></div>
   <div class="row" style="margin-top:12px"><button class="primary" id="bk2Copy" style="flex:1">Copy</button><button id="bk2Paste" style="flex:1">Paste</button><button id="bk2Restore" style="flex:1">Restore</button></div>
   <details style="margin-top:12px"><summary style="cursor:pointer;color:var(--mute);font-size:14px">Automatic saves</summary><div id="bk2Auto" style="margin-top:6px"></div></details>
@@ -1120,7 +1156,7 @@ function autoRead(){try{return JSON.parse(localStorage.getItem(AUTO_KEY))||[]}ca
 function autoSave(force){try{const list=autoRead();if(!force&&list[0]&&Date.now()-list[0].t<3600000)return;
   const snap=bkMake();if(snap.length<200)return;
   let used=0;Object.keys(localStorage).forEach(k=>{if(k!==AUTO_KEY)used+=k.length+(localStorage.getItem(k)||"").length});
-  let l=[{t:Date.now(),d:snap},...list].slice(0,3);
+  let l=[{t:Date.now(),d:snap},...list].slice(0,5);
   while(l.length&&used+JSON.stringify(l).length>1800000)l.pop();
   if(l.length)localStorage.setItem(AUTO_KEY,JSON.stringify(l))}catch(e){}}
 function drawAuto(){const l=autoRead(),box=$("bkAuto");
@@ -1154,19 +1190,205 @@ function bk2Check(){const o=bk2Parse();if(!o){bk2Msg("That isn't a Command Cente
 function drawAuto2(){const l=autoRead(),box=$("bk2Auto");
   box.innerHTML=l.length?l.map((a,i)=>`<div class="row" style="margin:6px 0 0;align-items:center;justify-content:space-between"><span>${esc(new Date(a.t).toLocaleString("default",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}))}</span><button data-a2="${i}">Restore</button></div>`).join(""):`<div class="empty">None yet. The app keeps a copy about once an hour.</div>`;
   box.querySelectorAll("[data-a2]").forEach(b=>{let sure=false;b.onclick=()=>{if(!sure){sure=true;b.textContent="Tap again";return}try{bkApply(JSON.parse(l[b.dataset.a2].d))}catch(e){bk2Msg("Could not restore that save.",false)}}})}
-function bk2Open(){bk2Reset();$("bk2Text").value=bkMake();bk2Msg("");drawAuto2();$("bdlg2").showModal()}
+function bk2Open(){bk2Reset();$("bk2Text").value="";bk2Msg("");drawAuto2();$("bdlg2").showModal()}
 $("bkBtn").onclick=bk2Open;
 $("bk2Close").onclick=()=>$("bdlg2").close();
-$("bk2Text").oninput=()=>{bk2Reset();bk2Msg("")};
+$("bk2Text").oninput=()=>{bk2Reset();bk2Msg("");if($("bk2Text").value.length>40)bk2Check()};
 $("bk2Copy").onclick=async()=>{const t=$("bk2Text");t.value=bkMake();bk2Reset();let ok=false;
   try{await navigator.clipboard.writeText(t.value);ok=true}catch(e){}
   if(!ok){t.focus();t.select();t.setSelectionRange(0,t.value.length);try{ok=document.execCommand("copy")}catch(e){}}
   bk2Msg(ok?"Copied. Paste it somewhere safe.":"Couldn't copy automatically. The text is selected: press and hold it, then tap Copy.",ok)};
 $("bk2Paste").onclick=async()=>{bk2Reset();const t=$("bk2Text");let txt="";
   try{txt=await navigator.clipboard.readText()}catch(e){}
-  if(!txt){t.value="";t.focus();bk2Msg("Couldn't read the clipboard. Press and hold the box above and tap Paste.",false);return}
+  if(!txt){t.value="";t.focus();bk2Msg("Couldn't read the clipboard. Press and hold the box above and tap Paste. The pasted backup is checked automatically.",false);return}
   t.value=txt;bk2Check()};
 $("bk2Restore").onclick=()=>{const o=bk2Check();if(!o)return;if(!bk2Sure){bk2Sure=true;$("bk2Restore").textContent="Tap again";bk2Msg("This replaces the data on this device with the backup. Tap Restore again to confirm.",false);return}bkApply(o)};
+/* ===== Cloud sync (Supabase) =====
+   Your data always saves on this device first. Sync copies it to your private
+   Supabase account and brings changes from your other devices back. */
+const SB_URL="https://woxcixlydqnrqtwzkkkz.supabase.co",SB_KEY="sb_publishable_BoDuXP_g0AJkWfqD6sa0HQ_gWeYE6yE",SYNC_KEY="project-desk-sync";
+const B_KEY={projects:"project-desk-v1",learning:"project-desk-learning-v1",shelf:"project-desk-shelf-v1",boards:"project-desk-boards-v1",todo:"project-desk-todo-v1"};
+const BUCKETS=Object.keys(B_KEY),K_B={};BUCKETS.forEach(b=>{K_B[B_KEY[b]]=b});
+const B_NAME={projects:"Projects",learning:"Learning topics",shelf:"Shelf",boards:"Boards",todo:"Old to-do lists"};
+let ss={};try{ss=JSON.parse(localStorage.getItem(SYNC_KEY))||{}}catch(e){ss={}}
+ss.rev=ss.rev||{};ss.dirty=ss.dirty||{};
+const _setItem=Storage.prototype.setItem;
+const saveSS=()=>{try{_setItem.call(localStorage,SYNC_KEY,JSON.stringify(ss))}catch(e){}};
+let applyingRemote=false,sb=null,sbUser=null,chan=null,pollT=null,pushT=null,rtT=null,retryT=null,deferT=null,retryN=0,syncRunning=false,syncQueued=false,libOk=null,shownDecide=0;
+const sync={state:"boot",err:"",last:ss.last||0,decide:null,hold:{}};
+/* every save to one of the five data sections marks it as "waiting to sync" */
+Storage.prototype.setItem=function(k,v){_setItem.call(this,k,v);if(this===localStorage&&K_B[k]&&!applyingRemote){ss.dirty[K_B[k]]=true;saveSS();schedulePush()}};
+function schedulePush(){if(!sbUser)return;clearTimeout(pushT);pushT=setTimeout(requestSync,1500);updateSyncUI()}
+
+const stable=o=>o===null||typeof o!=="object"?JSON.stringify(o):Array.isArray(o)?"["+o.map(stable).join(",")+"]":"{"+Object.keys(o).sort().map(k=>JSON.stringify(k)+":"+stable(o[k])).join(",")+"}";
+function normB(b,o){if(b!=="boards"||!o||typeof o!=="object")return o;const c=Object.assign({},o);delete c.cur;delete c.size;delete c.full;return c}
+const same=(b,x,y)=>stable(normB(b,x))===stable(normB(b,y));
+function describe(b,o){if(!o)return"nothing";
+  if(b==="projects"||b==="learning")return(o.list||[]).length+(b==="projects"?" projects, ":" topics, ")+(o.cal||[]).length+" scheduled cards, "+Object.keys(o.notes||{}).length+" logs";
+  if(b==="shelf")return(o.pads||[]).length+" pads, "+(o.books||[]).length+" log books, "+(o.comps||[]).length+" completions";
+  if(b==="boards")return(o.boards||[]).length+" boards, "+(o.boards||[]).reduce((n,x)=>n+(x.pins||[]).length,0)+" pins";
+  if(b==="todo")return(o.lists||[]).length+" lists";return""}
+
+/* do not swap data under your fingers: wait while a window is open, you are typing, or dragging */
+function uiBusy(){const d=document.querySelector("dialog[open]");if(d&&d.id!=="sdlg")return true;
+  const a=document.activeElement;if(a&&!a.closest("#sdlg")&&(a.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)))return true;
+  return !!document.querySelector(".drag")}
+function defer(){clearTimeout(deferT);deferT=setTimeout(requestSync,2000)}
+function reloadMem(b){
+  if(b==="projects"||b==="learning"){if(page!==b)return;const s=safeLoad(B_KEY[b],o=>o&&Array.isArray(o.list));if(s){s.cal=s.cal||[];s.list.forEach((p,i)=>{if(p.h===undefined)p.h=(i*47)%360});S=s}}
+  else if(b==="shelf"){const p=safeLoad(B_KEY.shelf,o=>o&&Array.isArray(o.pads));if(p){p.books=p.books||[];p.comps=p.comps||[];P=p}}
+  else if(b==="boards"){const k=safeLoad(B_KEY.boards,o=>o&&Array.isArray(o.boards));if(k){const cur=K.cur,size=K.size;k.full=false;if(cur&&k.boards.some(x=>x.id===cur))k.cur=cur;if(size)k.size=size;K=k}}
+  else if(b==="todo"){const t=safeLoad(B_KEY.todo,o=>o&&Array.isArray(o.lists));if(t)T=t}}
+function applyRemote(b,row){
+  if(uiBusy())return false;
+  applyingRemote=true;try{localStorage.setItem(B_KEY[b],JSON.stringify(row.data))}catch(e){applyingRemote=false;return false}applyingRemote=false;
+  ss.rev[b]=row.revision;ss.dirty[b]=false;saveSS();reloadMem(b);render();return true}
+/* put a copy into the Backup window's "Automatic saves" so nothing is ever lost */
+function autoPush(map){try{const list=autoRead(),snap=JSON.stringify({app:"project-desk",v:1,saved:new Date().toISOString(),data:map});
+  let used=0;Object.keys(localStorage).forEach(k=>{if(k!==AUTO_KEY)used+=k.length+(localStorage.getItem(k)||"").length});
+  const l=[{t:Date.now(),d:snap},...list].slice(0,5);while(l.length>1&&used+JSON.stringify(l).length>2200000)l.pop();
+  _setItem.call(localStorage,AUTO_KEY,JSON.stringify(l))}catch(e){}}
+
+/* ---- talking to Supabase ---- */
+function ensureLib(){return new Promise(res=>{if(window.supabase&&window.supabase.createClient)return res(true);
+  const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.109.0";
+  s.onload=()=>res(!!(window.supabase&&window.supabase.createClient));s.onerror=()=>{s.remove();res(false)};document.head.appendChild(s)})}
+async function pushBucket(b){
+  const raw=localStorage.getItem(B_KEY[b]);if(raw==null){ss.dirty[b]=false;saveSS();return true}
+  let data;try{data=JSON.parse(raw)}catch(e){return true}
+  const r=await sb.from("app_data").update({data}).eq("user_id",sbUser.id).eq("bucket",b).eq("revision",ss.rev[b]).select("revision");
+  if(r.error)throw r.error;
+  if(r.data&&r.data.length){ss.rev[b]=r.data[0].revision;ss.dirty[b]=(localStorage.getItem(B_KEY[b])!==raw);saveSS();return true}
+  return false}
+async function reconcile(){
+  const r=await sb.from("app_data").select("bucket,data,revision,updated_at");
+  if(r.error)throw r.error;
+  const R={};(r.data||[]).forEach(x=>{R[x.bucket]=x});
+  const need=[];
+  for(const b of BUCKETS){
+    if(sync.hold[b])continue;
+    const row=R[b],raw=localStorage.getItem(B_KEY[b]),known=ss.rev[b]!=null;
+    let lo=null;if(raw!=null){try{lo=JSON.parse(raw)}catch(e){}}
+    if(!known){
+      if(!row&&raw==null)continue;
+      if(row&&raw==null){if(!applyRemote(b,row))defer();continue}
+      if(!row){
+        if(ss.init&&lo){const ins=await sb.from("app_data").insert({bucket:b,data:lo}).select("revision");
+          if(ins.error){if(ins.error.code==="23505"){syncQueued=true;continue}throw ins.error}
+          ss.rev[b]=ins.data[0].revision;ss.dirty[b]=false;saveSS();continue}
+        need.push({b,kind:"upload"});continue}
+      if(lo&&same(b,lo,row.data)){ss.rev[b]=row.revision;ss.dirty[b]=false;saveSS();continue}
+      need.push({b,kind:"conflict",row});continue}
+    if(!row){if(raw!=null)need.push({b,kind:"upload"});else{delete ss.rev[b];saveSS()}continue}
+    if(row.revision>ss.rev[b]){
+      if(!ss.dirty[b]){if(!applyRemote(b,row))defer();continue}
+      if(lo&&same(b,lo,row.data)){ss.rev[b]=row.revision;ss.dirty[b]=false;saveSS();continue}
+      need.push({b,kind:"conflict",row});continue}
+    if(ss.dirty[b]){const ok=await pushBucket(b);if(!ok)syncQueued=true}
+  }
+  if(need.length){need.forEach(it=>{sync.hold[it.b]=true});sync.decide={id:Date.now(),items:need.concat(sync.decide?sync.decide.items:[])}}}
+async function runSync(){
+  if(!sb||!sbUser||syncRunning)return;
+  syncRunning=true;sync.state="syncing";updateSyncUI();
+  try{
+    if(!navigator.onLine)throw new Error("offline");
+    let n=0;do{syncQueued=false;await reconcile()}while(syncQueued&&++n<4);
+    if(!sync.decide)ss.init=true;sync.last=Date.now();ss.last=sync.last;saveSS();sync.err="";retryN=0;sync.state="synced";
+  }catch(e){sync.err=(e&&e.message)||String(e);sync.state=navigator.onLine?"error":"offline";scheduleRetry()}
+  syncRunning=false;updateSyncUI();
+  if(syncQueued){syncQueued=false;requestSync()}}
+function requestSync(){if(syncRunning){syncQueued=true;return}runSync()}
+function scheduleRetry(){clearTimeout(retryT);const d=[5,15,30,60,120][Math.min(retryN++,4)]*1000;retryT=setTimeout(requestSync,d)}
+async function resolveDecision(choice){
+  const d=sync.decide;if(!d||!sb||!sbUser||syncRunning)return;
+  syncRunning=true;sync.err="";updateSyncUI();
+  try{
+    for(const it of d.items){const b=it.b,raw=localStorage.getItem(B_KEY[b]);
+      if(it.kind==="upload"){
+        if(raw==null){delete sync.hold[b];continue}
+        const r=await sb.from("app_data").insert({bucket:b,data:JSON.parse(raw)}).select("revision");
+        if(r.error)throw r.error;ss.rev[b]=r.data[0].revision;ss.dirty[b]=false}
+      else if(choice==="cloud"){
+        if(raw!=null)autoPush({[B_KEY[b]]:raw});
+        if(!applyRemote(b,it.row))throw new Error("Close any open windows and try again.")}
+      else{
+        autoPush({[B_KEY[b]]:JSON.stringify(it.row.data)});
+        const r=await sb.from("app_data").update({data:JSON.parse(raw)}).eq("user_id",sbUser.id).eq("bucket",b).eq("revision",it.row.revision).select("revision");
+        if(r.error)throw r.error;if(!r.data.length)throw new Error("The cloud changed again. Please try once more.");
+        ss.rev[b]=r.data[0].revision;ss.dirty[b]=false}
+      delete sync.hold[b];d.items=d.items.filter(x=>x!==it)}
+    ss.init=true;sync.decide=null;sync.state="synced";sync.last=Date.now();ss.last=sync.last;saveSS();
+  }catch(e){sync.err=(e&&e.message)||String(e)}
+  syncRunning=false;updateSyncUI();requestSync()}
+function stopRealtime(){if(chan&&sb){try{sb.removeChannel(chan)}catch(e){}}chan=null}
+function startRealtime(){stopRealtime();
+  chan=sb.channel("app_data_"+sbUser.id).on("postgres_changes",{event:"*",schema:"public",table:"app_data",filter:"user_id=eq."+sbUser.id},()=>{clearTimeout(rtT);rtT=setTimeout(requestSync,250)})
+    .subscribe(st=>{if(st==="SUBSCRIBED")requestSync()})}
+function onAuth(sess){const u=sess&&sess.user;
+  if(u&&(!sbUser||sbUser.id!==u.id)){
+    if(ss.uid&&ss.uid!==u.id){ss.rev={};ss.dirty={};ss.init=false;sync.hold={};sync.decide=null}
+    ss.uid=u.id;saveSS();sbUser=u;startRealtime();clearInterval(pollT);pollT=setInterval(requestSync,30000);sync.state="syncing";requestSync()}
+  else if(!u&&sbUser){sbUser=null;stopRealtime();clearInterval(pollT);sync.state="signedout";sync.decide=null;sync.hold={}}
+  else if(!u){sync.state="signedout"}
+  updateSyncUI()}
+async function initSync(){
+  libOk=await ensureLib();
+  if(!libOk){sync.state="nolib";updateSyncUI();return}
+  if(!sb){sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});
+    sb.auth.onAuthStateChange((ev,sess)=>{setTimeout(()=>onAuth(sess),0)})}
+  try{const r=await sb.auth.getSession();onAuth(r.data&&r.data.session)}catch(e){sync.state="error";sync.err=(e&&e.message)||String(e);updateSyncUI()}}
+
+/* ---- the Sync window and header icon ---- */
+const pendingCount=()=>BUCKETS.filter(b=>ss.dirty[b]).length;
+function ago(t){if(!t)return"never";const s=Math.round((Date.now()-t)/1000);return s<10?"just now":s<60?s+" seconds ago":s<3600?Math.round(s/60)+" minutes ago":new Date(t).toLocaleString()}
+function updateSyncUI(){const btn=$("syncBtn");if(!btn)return;
+  let st=sync.state;if(!sbUser&&st!=="nolib"&&st!=="boot")st="signedout";
+  if(sbUser&&sync.decide)st="decide";else if(sbUser&&st==="synced"&&pendingCount())st="pending";
+  const labels={nolib:"Sync unavailable",boot:"Sync starting",signedout:"Sign in to sync",syncing:"Syncing",synced:"Synced",pending:"Changes waiting to sync",offline:"Offline",error:"Sync problem",decide:"Sync needs your decision"};
+  btn.dataset.s=st;btn.title=labels[st]||"Sync";btn.setAttribute("aria-label",labels[st]||"Sync");
+  let t="";const n=pendingCount();
+  if(st==="nolib")t="Sync couldn't start because its library didn't load. Check your internet connection and reload the page. Your data is still saved on this device.";
+  else if(st==="boot")t="Starting\u2026";
+  else if(st==="signedout")t="Sign in to sync across your devices. Until then, everything stays on this device only.";
+  else{t="Signed in as "+(sbUser&&sbUser.email||"your account")+". ";
+    if(st==="syncing")t+="Syncing\u2026";
+    else if(st==="synced")t+="All changes synced "+ago(sync.last)+".";
+    else if(st==="pending")t+=n+" section"+(n>1?"s":"")+" waiting to sync.";
+    else if(st==="offline")t+="You're offline. "+(n?n+" section"+(n>1?"s":"")+" will sync when you're back online. ":"")+"Your changes are safe on this device.";
+    else if(st==="error")t+="Couldn't reach the cloud ("+sync.err+"). Trying again automatically. Your changes are safe on this device.";
+    else if(st==="decide")t+="Your decision is needed below. Syncing is paused for the sections listed."}
+  $("sStatus").textContent=t;
+  $("sOut").hidden=st!=="signedout";$("sIn").hidden=!sbUser;$("sDecide").hidden=!(sbUser&&sync.decide);
+  if(sbUser&&sync.decide&&shownDecide!==sync.decide.id+":"+sync.decide.items.length){shownDecide=sync.decide.id+":"+sync.decide.items.length;drawDecide()}
+  if(sbUser&&sync.decide)$("sDErr").textContent=sync.err&&st==="decide"?sync.err:"";
+  $("sSignIn").disabled=false}
+function drawDecide(){const d=sync.decide,conflict=d.items.some(i=>i.kind==="conflict");
+  $("sDLines").innerHTML=d.items.map(it=>{const loc=(()=>{try{return JSON.parse(localStorage.getItem(B_KEY[it.b]))}catch(e){return null}})();
+    return`<div style="margin:6px 0"><b>${esc(B_NAME[it.b])}</b><br>This device: ${esc(describe(it.b,loc))}.<br>Cloud: ${it.kind==="upload"?"nothing yet":esc(describe(it.b,it.row.data))}.</div>`}).join("");
+  $("sDHint").textContent=conflict?"Choose which copy to use. The copy you don't pick is saved in the Backup window under Automatic saves, so you can get it back.":"Your cloud account is empty for these sections. Uploading copies this device's data there. Nothing on this device changes.";
+  $("sDBtns").innerHTML=conflict?`<button class="primary" data-dc="cloud" style="flex:1">Use cloud data</button><button data-dc="local" style="flex:1">Use this device's data</button>`:`<button class="primary" data-dc="upload" style="flex:1">Upload my data</button>`;
+  $("sDBtns").querySelectorAll("[data-dc]").forEach(b=>{b.onclick=()=>resolveDecision(b.dataset.dc)});syncDecideBtns()}
+function syncDecideBtns(){const on=$("sBk").checked;$("sDBtns").querySelectorAll("[data-dc]").forEach(b=>{b.disabled=!on})}
+$("sBk").onchange=syncDecideBtns;
+$("syncBtn").onclick=()=>{updateSyncUI();$("sErr").hidden=true;$("sdlg").showModal()};
+$("sClose").onclick=()=>$("sdlg").close();
+function showSErr(t){const e=$("sErr");e.hidden=!t;e.textContent=t||""}
+$("sSignIn").onclick=async()=>{if(!sb){showSErr("Sync isn't available right now.");return}
+  const email=$("sEmail").value.trim(),pw=$("sPass").value;if(!email||!pw){showSErr("Enter your email and password.");return}
+  $("sSignIn").disabled=true;showSErr("");
+  try{const r=await sb.auth.signInWithPassword({email,password:pw});
+    if(r.error)showSErr(/invalid/i.test(r.error.message)?"That email or password didn't work.":"Couldn't sign in: "+r.error.message);else $("sPass").value=""}
+  catch(e){showSErr("Couldn't reach Supabase. Check your connection and try again.")}
+  $("sSignIn").disabled=false};
+$("sPass").onkeydown=e=>{if(e.key==="Enter")$("sSignIn").click()};
+$("sNow").onclick=()=>requestSync();
+$("sOutBtn").onclick=async()=>{if(sb)await sb.auth.signOut()};
+window.addEventListener("online",()=>{if(!libOk)initSync();else requestSync()});
+window.addEventListener("offline",()=>{sync.state="offline";updateSyncUI()});
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")requestSync()});
+window.addEventListener("focus",requestSync);
+updateSyncUI();initSync();
+
 function dayHtml(dt,today,other){const k=ymd(dt);
   const es=dayCards(k);
   const lbl=(focusWeek?dt.toLocaleDateString("default",{weekday:"short"})+" ":"")+(dt.getDate()===1?dt.toLocaleString("default",{month:"short"})+" 1":dt.getDate());
