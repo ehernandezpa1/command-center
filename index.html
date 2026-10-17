@@ -332,11 +332,49 @@ input[type=email]:focus,input[type=password]:focus{outline:2px solid var(--accen
 #syncBtn[data-s=signedout] .sdot,#syncBtn[data-s=nolib] .sdot{background:#9aa3b2}
 @keyframes syp{50%{opacity:.3}}
 @media(prefers-reduced-motion:reduce){#syncBtn[data-s=syncing] .sdot{animation:none}}
+.sw.sw3{grid-template-columns:repeat(3,1fr)}
+.sw.sw3::before{width:calc((100% - 4px)/3)}
+.sw.sw3[data-on="1"]::before{transform:translateX(100%)}
+.sw.sw3[data-on="2"]::before{transform:translateX(200%)}
+.sw.sw3 span{padding:6px 14px}
+.tabs.sub .sw.sw3 span{padding:4px 11px}
+.day.past{background:var(--bg);color:var(--mute)}
+.day.past .chip{filter:grayscale(1);opacity:.55}
+.day.past.wkhl{background:var(--soft)}
+#cal,#store{overflow-anchor:none}
+.cal>.top{flex-wrap:wrap;gap:8px}
+.tgl{display:inline-flex;align-items:center;gap:8px;padding:6px 12px}
+.tgl i{width:30px;height:16px;border-radius:99px;background:var(--line);position:relative;transition:background .15s}
+.tgl i::after{content:"";position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:#fff;transition:transform .15s}
+.tgl[aria-checked=true] i{background:var(--accent)}
+.tgl[aria-checked=true] i::after{transform:translateX(14px)}
+@media(prefers-reduced-motion:reduce){.tgl i,.tgl i::after{transition:none}}
+body[data-page="body"] .chip{background:var(--bg);background:color-mix(in srgb,var(--c) 26%,var(--surface))}
+body[data-page="body"] .chip.armed{outline:2px solid var(--accent)}
+#bpList{display:block;margin:8px 0}
+.bpg{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.bph{font-size:13px;font-weight:600;color:var(--mute);margin:6px 0 4px}
+.npt{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:85;width:26px;height:64px;padding:0;border-radius:12px 0 0 12px;border:1px solid var(--line);border-right:0;background:var(--surface);color:var(--ink);box-shadow:-2px 2px 8px rgba(0,0,0,.2);font-size:20px;line-height:1}
+.npp{position:fixed;right:8px;top:50%;transform:translateY(-50%);z-index:85;width:min(330px,calc(100vw - 16px));max-height:75vh;display:flex;flex-direction:column;gap:8px;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:10px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+#npSel{font:inherit;font-size:14px;padding:6px 8px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);max-width:190px}
+#npEd{min-height:150px;max-height:38vh;overflow:auto;background:#fffef5;color:#2b2b2b;border:1px solid #d8d3bd;border-radius:10px;padding:10px;font-size:15px;line-height:1.4;outline:none}
+#npEd:empty:before{content:attr(data-ph);color:#a8a28a}
+#npEd ul,#npEd ol{margin:.2em 0;padding-left:1.3em}
+#npEd .ck.done{text-decoration:line-through;color:#8a8470}
+#npEd input[type=checkbox]{width:17px;height:17px;accent-color:var(--accent);vertical-align:middle;margin:0 4px 0 0}
+.npp .pfoot{margin-top:0}
+.hrow{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px;background:var(--bg)}
+.hdot{width:14px;height:14px;border-radius:50%;flex:none}
+.hbadge{font-size:12px;font-weight:700;background:var(--accent);color:var(--accent-ink);border-radius:99px;padding:3px 10px}
+#syncBtn[data-s=outdated] .sdot{background:#ff9f1a}
+#mlog,#tkSw{white-space:nowrap}
+.tabs{margin-bottom:0}
+@media(max-width:480px){.sw.sw3 span{padding:6px 8px;font-size:14px}.tabs.sub .sw.sw3 span{padding:4px 8px;font-size:13px}.tabs button[data-pg=boards]{padding:6px 14px;font-size:14px}}
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="top" style="align-items:flex-start"><div class="tabs" id="tabs" role="tablist" style="flex:1;min-width:0"></div><span class="row" style="margin:0"><button id="shelfBtn" class="shelfbtn">Shelf</button><button id="syncBtn" title="Sync" aria-label="Sync"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg><i class="sdot"></i></button><button id="bkBtn" title="Save a backup" aria-label="Save or restore a backup"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h11l3 3v15H5z"/><path d="M8 3v5h7V3"/><rect x="8" y="13" width="8" height="8"/></svg></button></span></div>
+  <div class="top" style="align-items:flex-start;flex-wrap:wrap;gap:8px"><div class="tabs" id="tabs" role="tablist" style="flex:1 1 auto"></div><span class="row" style="margin:0 0 0 auto"><button id="shelfBtn" class="shelfbtn">Shelf</button><button id="syncBtn" title="Sync" aria-label="Sync"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg><i class="sdot"></i></button><button id="bkBtn" title="Save a backup" aria-label="Save or restore a backup"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h11l3 3v15H5z"/><path d="M8 3v5h7V3"/><rect x="8" y="13" width="8" height="8"/></svg></button></span></div>
   <section class="cal" id="cal"></section>
   <section class="cal" id="store" style="margin-top:16px"></section>
   <section class="cal" id="todo" hidden></section>
@@ -480,7 +518,8 @@ input[type=email]:focus,input[type=password]:focus{outline:2px solid var(--accen
 
 <dialog id="cdlg">
   <div class="top"><h2 id="cTitle" style="margin:0;font-size:22px"></h2><button class="ghost" id="cClose" aria-label="Close">&times;</button></div>
-  <div class="row" style="margin:0 0 8px;align-items:center;flex-wrap:wrap"><input type="date" id="cDay" aria-label="Day"><button id="cStore">Move to storage</button><button id="cDup">Duplicate</button></div>
+  <div class="row" style="margin:0 0 8px;align-items:center;flex-wrap:wrap"><input type="date" id="cDay" aria-label="Day"><button id="cStore">Move to folder</button><button id="cDup">Duplicate</button></div>
+  <div class="row" style="margin:0 0 8px;align-items:center;flex-wrap:wrap"><span style="font-size:14px;color:var(--mute)">Order on this day</span><button id="cUp" aria-label="Move earlier">&uarr; Earlier</button><button id="cDn" aria-label="Move later">&darr; Later</button><span id="cPos" style="font-size:13px;color:var(--mute)"></span></div>
   <div id="cTasks"></div>
   <div class="row" style="margin:10px 0 0;align-items:center"><span style="font-size:14px;color:var(--mute)">Text size</span><button id="cSm" aria-label="Smaller text">&minus;</button><span id="cSz" style="min-width:48px;text-align:center"></span><button id="cLg" aria-label="Larger text">+</button></div>
   <div class="empty" id="cLogMsg" style="margin-top:6px"></div>
@@ -491,10 +530,18 @@ input[type=email]:focus,input[type=password]:focus{outline:2px solid var(--accen
 <button class="bp" id="bpBtn" hidden aria-label="Open backpack"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6a2 2 0 0 1 2 2v1H7V5a2 2 0 0 1 2-2z"/><rect x="4" y="6" width="16" height="15" rx="4"/><path d="M9 14h6"/></svg>Backpack<span id="bpCount" style="opacity:.8"></span></button>
 <div class="bpp" id="bpPanel" hidden role="dialog" aria-label="Backpack"><div class="top"><b>Backpack</b><button class="ghost" id="bpClose" aria-label="Close backpack">&times;</button></div><div class="empty">Drag a card to a date, or tap a card and then tap a date.</div><div id="bpList"></div><button id="bpAdd">+ Add card</button></div>
 
+<button class="npt" id="npTab" aria-label="Open handheld notepad" title="Handheld notepad">&lsaquo;</button>
+<div class="npp" id="npPanel" hidden role="dialog" aria-label="Handheld notepad">
+  <div class="top"><select id="npSel" aria-label="Choose notepad"></select><span class="row" style="margin:0"><button class="ghost" id="npNew" title="New sheet" aria-label="New sheet">+</button><button class="ghost" id="npClose" aria-label="Close notepad">&times;</button></span></div>
+  <div class="tb" id="npTb" role="toolbar" aria-label="Notepad tools"><button data-k="bold" aria-label="Bold"><b>B</b></button><button data-k="italic" aria-label="Italic"><i>I</i></button><button data-k="insertUnorderedList">&bull; List</button><button id="npCheck">&#9744; Box</button></div>
+  <div id="npEd" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Quick note" data-ph="Quick note..."></div>
+  <div class="pfoot"><button id="npPrev" aria-label="Previous sheet">&lsaquo;</button><span id="npCnt"></span><button id="npNext" aria-label="Next sheet">&rsaquo;</button></div>
+</div>
+
 <script>
-const KEYS={projects:"project-desk-v1",learning:"project-desk-learning-v1"};
-const SEEDS={projects:["Manhwa","Illustration","Songwriting","Worldbuilding","3D sculpting","Music production","Guitar covers","Vlogging","Game development"],learning:["Music theory","Drawing fundamentals","3D modeling","Game design","Storytelling","Guitar technique"]};
-let mode="cal";let page="projects";try{const pv=localStorage.getItem("project-desk-page");if(pv==="learning")page="learning";if(pv==="shelf"||pv==="boards")mode=pv}catch(e){}
+const KEYS={projects:"project-desk-v1",learning:"project-desk-learning-v1",body:"project-desk-body-v1"};
+const SEEDS={projects:["Manhwa","Illustration","Songwriting","Worldbuilding","3D sculpting","Music production","Guitar covers","Vlogging","Game development"],learning:["Music theory","Drawing fundamentals","3D modeling","Game design","Storytelling","Guitar technique"],body:["Workout","Stretching","Walk","Meal prep","Sleep","Water"]};
+let mode="cal";let page="projects";try{const pv=localStorage.getItem("project-desk-page");if(pv==="learning"||pv==="body")page=pv;if(pv==="shelf"||pv==="boards")mode=pv}catch(e){}
 let KEY=KEYS[page];
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -505,7 +552,7 @@ function safeLoad(k,ok){let raw=null;try{raw=localStorage.getItem(k)}catch(e){re
   if(o!==undefined&&(!ok||ok(o)))return o;
   try{if(localStorage.getItem(k+"-corrupt")===null)localStorage.setItem(k+"-corrupt",raw)}catch(e2){}
   return null}
-const DATA_VERSION=2,ALL_KEYS=["project-desk-v1","project-desk-learning-v1","project-desk-shelf-v1","project-desk-todo-v1","project-desk-page","project-desk-boards-v1"];
+const DATA_VERSION=2,ALL_KEYS=["project-desk-v1","project-desk-learning-v1","project-desk-shelf-v1","project-desk-todo-v1","project-desk-page","project-desk-boards-v1","project-desk-body-v1"];
 (function(){let v=0;try{v=+localStorage.getItem("project-desk-schema")||0}catch(e){}
   if(v>=DATA_VERSION)return;
   try{if(v>0){const snap={};ALL_KEYS.forEach(k=>{const x=localStorage.getItem(k);if(x!==null)snap[k]=x});localStorage.setItem("project-desk-prebackup-v"+v,JSON.stringify(snap))}
@@ -524,7 +571,7 @@ const ymd=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+Stri
 let vm=new Date();vm.setDate(1);let armed=null,editing=null,curCard=null,delArmed=false;
 const col=p=>`hsl(${p.h} 60% 55%);--c:hsl(${p.h} 60% 55%)`;
 
-function render(){
+function renderMain(){
   
   if(mode==="boards"){$("shelf").hidden=true;renderBoards();return}
   if(mode==="shelf"){$("boards").hidden=true;renderShelf();return}
@@ -537,17 +584,17 @@ function render(){
   for(let d=1;d<=days;d++){const k=ymd(new Date(y,m,d));
     const es=S.cal.filter(e=>e.date===k).map(e=>{const p=S.list.find(x=>x.id===e.pid);if(!p)return"";const t=e.tasks||[];
       return `<div class="chip" draggable="true" data-e="${e.id}" style="border-left-color:${col(p)}"><span data-edit="${e.id}"><b>${esc(p.name)}</b>${t.slice(0,3).map(x=>`<small class="tk ${x.d?"done":""}">${esc(x.t)}</small>`).join("")||'<small class="tk">Tap to add tasks</small>'}${t.length>3?`<small class="tk">+${t.length-3} more</small>`:""}</span><button class="ghost" data-rm="${e.id}" aria-label="Remove from day">&times;</button></div>`}).join("");
-    cells+=`<div class="day ${k===today?"today":""}" data-d="${k}" data-wkk="${ymd(new Date(y,m,d-(new Date(y,m,d).getDay()+6)%7))}"><div class="dn">${focusWeek?new Date(y,m,d).toLocaleDateString("default",{weekday:"short"})+" ":""}${d}</div>${dayCards(k)}</div>`;
+    cells+=`<div class="day ${k===today?"today":""}${k<today?" past":""}" data-d="${k}" data-wkk="${ymd(new Date(y,m,d-(new Date(y,m,d).getDay()+6)%7))}"><div class="dn">${focusWeek?new Date(y,m,d).toLocaleDateString("default",{weekday:"short"})+" ":""}${d}</div>${dayCards(k)}</div>`;
     const dw=(new Date(y,m,d).getDay()+6)%7;
     if(dw===6||d===days){for(let i=dw+1;i<=6;i++)cells+=dayHtml(new Date(y,m+1,i-dw),today,true);const wk=ymd(new Date(y,m,d-dw)),nt=plain((S.notes||{})[wk]||"").trim();cells+=`<div class="wk" data-wkk="${wk}"><button data-zw="${wk}" aria-pressed="${focusWeek===wk}" title="${focusWeek===wk?"Show the whole month":"Zoom in on this week"}">Week ${weekNo(wk)}${focusWeek===wk?" ✕":""}</button><button data-wn="${wk}">LOG${nt?" •":""}</button><span class="wnote">${esc(nt)}</span></div>`}}
-  $("cal").innerHTML=`<div class="top"><h3>${vm.toLocaleString("default",{month:"long",year:"numeric"})}</h3><div class="row" style="margin:0"><button id="mlog">MONTH LOG${plain((S.notes||{})["m:"+y+"-"+String(m+1).padStart(2,"0")]||"").trim()?" •":""}</button><button id="pm" aria-label="Previous month">&lsaquo;</button><button id="nm" aria-label="Next month">&rsaquo;</button></div></div>
+  $("cal").innerHTML=`<div class="top"><h3>${vm.toLocaleString("default",{month:"long",year:"numeric"})}</h3><div class="row" style="margin:0"><button id="tkSw" class="tgl" role="switch" aria-checked="${!hideTasks}" title="Show or hide tasks on cards"><i></i>Tasks</button><button id="mlog">MONTH LOG${plain((S.notes||{})["m:"+y+"-"+String(m+1).padStart(2,"0")]||"").trim()?" •":""}</button><button id="pm" aria-label="Previous month">&lsaquo;</button><button id="nm" aria-label="Next month">&rsaquo;</button></div></div>
   <div class="tray">${S.list.map(p=>`<div class="chip pick ${armed===p.id?"armed":""}" draggable="true" data-p="${p.id}" style="border-left-color:${col(p)}"><span>${esc(p.name)}</span><button class="ghost" data-m="${p.id}" aria-label="Rename or delete ${esc(p.name)}">&#9998;</button></div>`).join("")||`<div class="empty">No ${noun()}s yet. Tap + to add one.</div>`}<button id="plus" aria-label="Add project" style="padding:4px 16px;font-size:20px;line-height:1.3">+</button></div>
   
   <div class="empty">Drag a ${noun()} onto a day, or tap a ${noun()}, then tap a day. Tap a card on the calendar to add tasks. Tap the pencil to rename or delete a ${noun()}.</div>
   <div class="grid${focusWeek?" focus":""}">${["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map(w=>`<div class="wd">${w}</div>`).join("")}${cells}</div>`;
   wire();renderStore();applyWords();
 }
-const noun=()=>page==="learning"?"topic":"project";
+const noun=()=>page==="learning"?"topic":page==="body"?"item":"project";
 function switchPage(p){
   if(p==="boards"){mode="boards";try{localStorage.setItem("project-desk-page","boards")}catch(e){}render();return}
   if(p==="shelf"){mode="shelf";try{localStorage.setItem("project-desk-page","shelf")}catch(e){}render();return}
@@ -559,13 +606,13 @@ function switchPage(p){
   if(!s||!Array.isArray(s.list))s={list:SEEDS[p].map(n=>({id:nid(),name:n})),cal:[]};
   s.cal=s.cal||[];s.list.forEach((q,i)=>{if(q.h===undefined)q.h=(i*47)%360});
   S=s;armed=null;render()}
-function applyWords(){const n=noun();$("aTitle").textContent="New "+n;$("aAdd").textContent="Add "+n;$("mTitle").textContent="Edit "+n;$("mDel").textContent="Delete "+n;document.title="Command Center";document.body.dataset.page=mode==="cal"?page:"";updateBp();
+function applyWords(){const n=noun();$("aTitle").textContent="New "+n;$("aAdd").textContent="Add "+n;$("mTitle").textContent="Edit "+n;$("mDel").textContent="Delete "+n;document.title="Command Center";document.body.dataset.page=mode==="cal"?page:"";updateBp();drawHand();
   $("tabs").innerHTML=navHtml();wireSwitch();$("shelfBtn").classList.toggle("on",mode==="shelf");const _navOld=["projects","learning","shelf"].map(p=>{const on=mode==="cal"?p===page:p===mode;return `<button role="tab" aria-selected="${on}" data-pg="${p}" class="${on?"on":""}">${p==="projects"?"Projects":p==="learning"?"Learning topics":"Shelf"}</button>`}).join("");
   $("tabs").querySelectorAll("[data-pg]").forEach(b=>b.onclick=()=>switchPage(b.dataset.pg))}
 let focusWeek=null;
 const weekNo=k=>{const s=new Date(k+"T00:00"),sat=new Date(s.getFullYear(),s.getMonth(),s.getDate()+6),j=new Date(sat.getFullYear(),0,1),doy=Math.round((sat-j)/864e5)+1;return Math.floor((doy-1+(j.getDay()+6)%7)/7)+1};
 const nameFit=n=>{const L=Math.max(4,...n.split(/\s+/).map(w=>w.length));return `font-size:calc(var(--ts,1)*12px);font-size:calc(var(--ts,1)*clamp(8px,calc((100cqw - var(--ov,30px))/${(L*0.62).toFixed(2)}),13px))`};
-const dayCards=k=>S.cal.filter(e=>e.date===k).map(e=>{const p=S.list.find(x=>x.id===e.pid);if(!p)return"";const t=e.tasks||[],lim=focusWeek?99:3;return `<div class="chip" draggable="true" data-e="${e.id}" style="border-left-color:${col(p)}${e.sz&&e.sz!==1?";--ts:"+e.sz:""}"><span data-edit="${e.id}"><b style="${nameFit(p.name)}">${esc(p.name)}</b>${t.slice(0,lim).map(x=>`<small class="tk tkb ${x.d?"done":""}">${esc(x.t)}</small>`).join("")||'<small class="tk">Tap to add tasks</small>'}${t.length>lim?`<small class="tk">+${t.length-lim} more</small>`:""}</span><button class="ghost" data-rm="${e.id}" aria-label="Remove from day">&times;</button></div>`}).join("");
+const dayCards=k=>S.cal.filter(e=>e.date===k).map(e=>{const p=S.list.find(x=>x.id===e.pid);if(!p)return"";const t=e.tasks||[],lim=focusWeek?99:3;return `<div class="chip" draggable="true" data-e="${e.id}" style="border-left-color:${col(p)}${e.sz&&e.sz!==1?";--ts:"+e.sz:""}"><span data-edit="${e.id}"><b style="${nameFit(p.name)}">${esc(p.name)}</b>${hideTasks?"":t.slice(0,lim).map(x=>`<small class="tk tkb ${x.d?"done":""}">${esc(x.t)}</small>`).join("")||'<small class="tk">Tap to add tasks</small>'}${!hideTasks&&t.length>lim?`<small class="tk">+${t.length-lim} more</small>`:""}</span><button class="ghost" data-rm="${e.id}" aria-label="Remove from day">&times;</button></div>`}).join("");
 let T=safeLoad("project-desk-todo-v1",o=>o&&Array.isArray(o.lists));
 if(!T||!Array.isArray(T.lists))T={lists:["Chores","Housework","Groceries"].map(n=>({id:nid(),name:n,items:[]}))};
 const saveT=()=>{try{localStorage.setItem("project-desk-todo-v1",JSON.stringify(T))}catch(e){}};
@@ -604,6 +651,7 @@ function renderShelf(){
   $("cal").hidden=true;$("store").hidden=true;$("todo").hidden=true;const box=$("shelf");box.hidden=false;
   const pad=openPad?P.pads.find(x=>x.id===openPad):null;
   if(!pad){openPad=null;
+    if(shelfTab==="handheld"){renderHandheld(box);applyWords();return}
     if(shelfTab==="completions"){renderCompletions(box);applyWords();return}
     if(shelfTab!=="pads"){renderLogs(box);applyWords();return}
     const per=Math.max(2,Math.floor((Math.min(window.innerWidth,1060)-(window.innerWidth<600?80:92)+12)/130));
@@ -765,7 +813,7 @@ function exportMonth(){const k=wkKey;if(!k||!k.startsWith("m:"))return;
   const [yy,mm]=k.slice(2).split("-").map(Number),d0=new Date(yy,mm-1,1),mname=d0.toLocaleString("default",{month:"long",year:"numeric"}),html=compileMonth(S.notes||{},yy,mm);
   if(!html){$("nExpMsg").textContent="Nothing to export yet. Write a log first.";return}
   let sfx="",c=2;while(P.books.some(b=>b.name==="Log "+mname+sfx))sfx=" ("+(c++)+")";
-  P.books.push({id:nid(),name:"Log "+mname+sfx,title:d0.toLocaleString("default",{month:"short",year:"numeric"})+sfx,color:page==="projects"?"#4f81bd":"#6a9a3a",src:page,label:page==="projects"?"Projects":"Learning topics",mk:k.slice(2),html,ann:[]});saveP();showExported(P.books[P.books.length-1]);
+  P.books.push({id:nid(),name:"Log "+mname+sfx,title:d0.toLocaleString("default",{month:"short",year:"numeric"})+sfx,color:PG_COLOR[page],src:page,label:PG_NAME[page],mk:k.slice(2),html,ann:[]});saveP();showExported(P.books[P.books.length-1]);
   $("nExpMsg").textContent=`Exported as "Log ${mname}${sfx}" to the Logs tab. It is a read-only book you can annotate or delete.`}
 function renderLogs(box){
   const books=(P.books||[]).filter(b=>b.src===shelfTab);
@@ -775,7 +823,7 @@ function renderLogs(box){
     return `<button class="spine m${b.id===newBookId?" hl":""}" data-lb="${b.id}" style="--pc:${b.color};height:${hh}px;width:${w}px" aria-label="${esc(b.name)}"><span>${esc(b.title)}</span>${b.id===newBookId?'<i class="newtag">NEW</i>':""}</button>`});
   const rows=Math.max(2,Math.ceil(items.length/per));let shelves="";
   for(let r=0;r<rows;r++)shelves+=`<div class="shelf">${items.slice(r*per,(r+1)*per).join("")}</div><div class="plank"></div>`;
-  box.innerHTML=`${subTabs()}<div class="empty" style="margin:6px 0 4px">${books.length?"Each book is an exported month log. Tap one to read it, add annotations, or delete it.":"No "+(shelfTab==="projects"?"project":"learning")+" log books yet. Open MONTH LOG on the "+(shelfTab==="projects"?"Projects":"Learning topics")+" calendar and press Export as book to add one here."}</div>${shelves}`;
+  box.innerHTML=`${subTabs()}<div class="empty" style="margin:6px 0 4px">${books.length?"Each book is an exported month log. Tap one to read it, add annotations, or delete it.":"No "+PG_ADJ[shelfTab]+" log books yet. Open MONTH LOG on the "+PG_NAME[shelfTab]+" calendar and press Export as book to add one here."}</div>${shelves}`;
   wireSub(box);
   box.querySelectorAll("[data-lb]").forEach(b=>b.onclick=()=>{openLog=b.dataset.lb;renderShelf()})}
 function renderLogBook(box,b){
@@ -791,7 +839,7 @@ function compileMonth(N,y,m){
   if(plain(mo).trim())parts.push(`<div><b>Month log</b></div>${toHtml(mo)}`);
   for(let d=new Date(y,m-1,1-(first.getDay()+6)%7);d<=last;d.setDate(d.getDate()+7)){const n=N[ymd(d)]||"";if(wedIn(d,y,m)&&plain(n).trim())parts.push(`<div><b>${esc(weekLabel(ymd(d)))}</b></div>${toHtml(n)}`)}
   return parts.join("<div><br></div>")}
-const BK_KEYS=["project-desk-v1","project-desk-learning-v1","project-desk-shelf-v1","project-desk-todo-v1","project-desk-page","project-desk-boards-v1"];
+const BK_KEYS=["project-desk-v1","project-desk-learning-v1","project-desk-shelf-v1","project-desk-todo-v1","project-desk-page","project-desk-boards-v1","project-desk-body-v1"];
 let bkSure=false;
 function bkMake(){const d={};BK_KEYS.forEach(k=>{try{const v=localStorage.getItem(k);if(v!==null)d[k]=v}catch(e){}});return JSON.stringify({app:"project-desk",v:1,saved:new Date().toISOString(),data:d})}
 function bkMsg(t,ok){const m=$("bkMsg");m.hidden=false;m.textContent=t;m.style.color=ok?"var(--accent)":"#c0392b"}
@@ -811,9 +859,9 @@ function logsShelfHtml(hid){const hb=(P.books||[]).find(x=>x.id===hid),books=(P.
   const rows=Math.max(2,Math.ceil(items.length/per));let o="";
   for(let r=0;r<rows;r++)o+=`<div class="shelf">${items.slice(r*per,(r+1)*per).join("")}</div><div class="plank"></div>`;
   return o}
-function goLogs(id){shelfTab=page==="learning"?"learning":"projects";openLog=null;newBookId=id||null;switchPage("shelf");if(id)setTimeout(()=>{newBookId=null},6000)}
+function goLogs(id){shelfTab=page;openLog=null;newBookId=id||null;switchPage("shelf");if(id)setTimeout(()=>{newBookId=null},6000)}
 function showExported(b){const i=P.books.filter(x=>x.src===b.src).indexOf(b),per=logsPer();exportedId=b.id;
-  $("edMsg").textContent=`"${b.name}" is on shelf ${Math.floor(i/per)+1} of your ${b.src==="projects"?"Project":"Learning"} logs, book ${i%per+1}, marked NEW. New books go to the end of the shelf, to the right of older ones.`;
+  $("edMsg").textContent=`"${b.name}" is on shelf ${Math.floor(i/per)+1} of your ${PG_NAME[b.src]} logs, book ${i%per+1}, marked NEW. New books go to the end of the shelf, to the right of older ones.`;
   $("edPrev").innerHTML=logsShelfHtml(b.id);
   $("edlg").showModal();
   const h=$("edPrev").querySelector(".hl");if(h)h.scrollIntoView({block:"center",inline:"center"})}
@@ -827,7 +875,7 @@ function logTask(card,task,on){S.notes=S.notes||{};
     task.id=task.id||nid();task.lw=wk;
     const cur=S.notes[wk]||"";
     if(!cur.includes('data-task="'+task.id+'"')){
-      const label=new Date().toLocaleDateString("default",{weekday:"short",month:"short",day:"numeric"}),line=`<div data-task="${task.id}">&#9745; <b>${esc(p?p.name:"")}</b>: ${esc(task.t)} <span style="opacity:.65">(finished ${esc(label)})</span></div>`;
+      const label=d.toLocaleDateString("default",{weekday:"short",month:"short",day:"numeric"}),line=`<div data-task="${task.id}">&#9745; <b>${esc(p?p.name:"")}</b>: ${esc(task.t)} <span style="opacity:.65">(${esc(label)})</span></div>`;
       S.notes[wk]=(plain(cur).trim()?toHtml(cur):"")+line}
     if(msg)msg.textContent="Added to the log for "+weekLabel(wk)+".";
   }else if(task.lw){
@@ -840,7 +888,7 @@ $("cDup").onclick=()=>{if(!curCard)return;const n={id:nid(),pid:curCard.pid,date
 let flashId=null;
 function flashNew(){if(!flashId)return;const id=flashId;flashId=null;const el=document.querySelector(`#store [data-e="${id}"]`);if(!el)return;el.classList.add("flash");el.scrollIntoView({behavior:"smooth",block:"center"})}
 let lastLogs=null;
-function navHtml(){const cal=mode==="cal",pj=cal&&page==="projects",ln=cal&&page==="learning";
+function navHtmlOld(){const cal=mode==="cal",pj=cal&&page==="projects",ln=cal&&page==="learning";
   return `<div class="sw" role="switch" tabindex="0" aria-checked="${page==="learning"}" aria-label="${cal?"Switch between Projects and Learning":"Back to the "+(page==="learning"?"Learning":"Projects")+" calendar"}" data-on="${page==="learning"?1:0}"${cal?"":' data-off="1"'}><span class="${page==="projects"?"on":""}">Projects</span><span class="${page==="learning"?"on":""}">Learning</span></div><button role="tab" aria-selected="${mode==="boards"}" data-pg="boards" class="${mode==="boards"?"on":""}">Boards</button>`}
 const subTabsOld2=()=>{const lg=shelfTab!=="pads";if(lg)lastLogs=shelfTab;
   return `<div class="tabs sub" role="tablist"><button role="tab" aria-selected="${!lg}" data-st="pads" class="${!lg?"on":""}">Pads</button><button role="tab" aria-selected="${lg}" data-st="${lg?shelfTab:(lastLogs||(page==="learning"?"learning":"projects"))}" class="${lg?"on":""}">Logs</button>${lg?`<div class="sw" role="radiogroup" aria-label="Logs for" data-on="${shelfTab==="learning"?1:0}"><button role="radio" aria-checked="${shelfTab==="projects"}" data-st="projects" class="${shelfTab==="projects"?"on":""}">Projects</button><button role="radio" aria-checked="${shelfTab==="learning"}" data-st="learning" class="${shelfTab==="learning"?"on":""}">Learning</button></div>`:""}</div>`};
@@ -1043,7 +1091,7 @@ P.comps=P.comps||[];
 const BG_COLORS=[["White","#ffffff"],["Cream","#fff8e7"],["Grey","#eef0f4"],["Blue","#e8f1ff"],["Green","#e9f7ec"],["Pink","#fdecf2"],["Slate","#2b3140"]];
 const isDarkBg=c=>{const h=(c||"#ffffff").replace("#",""),r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),bl=parseInt(h.slice(4,6),16);return (r*299+g*587+bl*114)/1000<128};
 function boardPct(b){const n=(b.pins||[]).length;return n?Math.round(b.pins.filter(p=>p.d).length/n*100):0}
-function destOptions(){const o=[["Projects calendar","cal:projects"],["Learning topics calendar","cal:learning"],["Shelf: Pads","shelf:pads"],["Shelf: Project logs","shelf:projects"],["Shelf: Learning logs","shelf:learning"],["Shelf: Completions","shelf:completions"]];K.boards.forEach(x=>o.push(["Board: "+x.name,"board:"+x.id]));return o}
+function destOptions(){const o=[["Projects calendar","cal:projects"],["Learning topics calendar","cal:learning"],["Body calendar","cal:body"],["Shelf: Pads","shelf:pads"],["Shelf: Project logs","shelf:projects"],["Shelf: Learning logs","shelf:learning"],["Shelf: Body logs","shelf:body"],["Shelf: Completions","shelf:completions"],["Shelf: Handheld notepad","shelf:handheld"]];K.boards.forEach(x=>o.push(["Board: "+x.name,"board:"+x.id]));return o}
 function goTo(d){const i=d.indexOf(":"),t=d.slice(0,i),v=d.slice(i+1);
   if(t==="cal"){switchPage(v);return}
   if(t==="shelf"){shelfTab=v;openLog=null;openPad=null;openComp=null;switchPage("shelf");return}
@@ -1119,7 +1167,7 @@ function wireK(box,b){
     el.querySelector(".sed").onclick=e=>{e.stopPropagation();askText({title:"Edit shortcut",value:s.t,select:{options:destOptions(),value:s.to},onOk:(v,c,sel)=>{s.t=v;s.to=sel||s.to;saveK();renderBoards()},del:{label:"Delete shortcut",onDel:()=>{b.shorts=b.shorts.filter(x=>x!==s);saveK();renderBoards()}}})};
     dragObj(el,s,stage,box,b,()=>goTo(s.to))});
 }
-const subTabs=()=>{const lg=shelfTab==="projects"||shelfTab==="learning";if(lg)lastLogs=shelfTab;
+const subTabsOld3=()=>{const lg=shelfTab==="projects"||shelfTab==="learning";if(lg)lastLogs=shelfTab;
   return `<div class="tabs sub" role="tablist"><button role="tab" aria-selected="${shelfTab==="pads"}" data-st="pads" class="${shelfTab==="pads"?"on":""}">Pads</button><button role="tab" aria-selected="${lg}" data-st="${lg?shelfTab:(lastLogs||(page==="learning"?"learning":"projects"))}" class="${lg?"on":""}">Logs</button><button role="tab" aria-selected="${shelfTab==="completions"}" data-st="completions" class="${shelfTab==="completions"?"on":""}">Completions</button>${lg?`<div class="sw" role="switch" tabindex="0" aria-checked="${shelfTab==="learning"}" aria-label="Switch between Project logs and Learning logs" data-on="${shelfTab==="learning"?1:0}" data-st="${shelfTab==="learning"?"projects":"learning"}"><span class="${shelfTab==="projects"?"on":""}">Projects</span><span class="${shelfTab==="learning"?"on":""}">Learning</span></div>`:""}</div>`};
 function renderCompletions(box){const comps=P.comps||[];
   if(openComp){const c=comps.find(x=>x.id===openComp);if(c){renderComp(box,c);return}openComp=null}
@@ -1134,7 +1182,7 @@ function renderComp(box,c){const d=new Date(c.date).toLocaleDateString("default"
 function showSz(){if(!curCard)return;const s=curCard.sz||1;$("cSz").textContent=Math.round(s*100)+"%";$("cSm").disabled=s<=.1;$("cLg").disabled=false}
 function setSz(d){if(!curCard)return;curCard.sz=Math.max(.1,Math.round((curCard.sz||1)*(d>0?1.15:1/1.15)*100)/100);save();showSz()}
 $("cSm").onclick=()=>setSz(-.1);$("cLg").onclick=()=>setSz(.1);
-function drawBp(){const l=$("bpList");l.innerHTML=S.list.map(p=>`<div class="chip pick ${armed===p.id?"armed":""}" draggable="true" data-bp="${p.id}" style="border-left-color:${col(p)}"><span>${esc(p.name)}</span></div>`).join("")||'<div class="empty">No cards yet.</div>';
+function drawBpOld(){const l=$("bpList");l.innerHTML=S.list.map(p=>`<div class="chip pick ${armed===p.id?"armed":""}" draggable="true" data-bp="${p.id}" style="border-left-color:${col(p)}"><span>${esc(p.name)}</span></div>`).join("")||'<div class="empty">No cards yet.</div>';
   l.querySelectorAll("[data-bp]").forEach(el=>{el.ondragstart=e=>e.dataTransfer.setData("text/plain","p:"+el.dataset.bp);el.onclick=()=>{armed=armed===el.dataset.bp?null:el.dataset.bp;drawBp()}});$("bpCount").textContent="("+S.list.length+")"}
 function updateBp(){const cal=mode==="cal",t=cal&&$("cal").querySelector(".tray");let vis=true;if(t){const r=t.getBoundingClientRect();vis=r.bottom>0&&r.top<window.innerHeight}
   const on=cal&&!vis;$("bpBtn").hidden=!on;if(!on)$("bpPanel").hidden=true;else if(!$("bpPanel").hidden)drawBp();else $("bpCount").textContent="("+S.list.length+")"}
@@ -1163,7 +1211,7 @@ function drawAuto(){const l=autoRead(),box=$("bkAuto");
   box.innerHTML=l.length?`<div style="font-size:14px;color:var(--mute);margin-bottom:4px">Automatic saves on this device</div>`+l.map((a,i)=>`<div class="row" style="margin:6px 0 0;align-items:center;justify-content:space-between"><span>${esc(new Date(a.t).toLocaleString("default",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}))}</span><button data-ar="${i}">Restore</button></div>`).join(""):`<div class="empty">No automatic saves yet. The app saves a copy about once an hour.</div>`;
   box.querySelectorAll("[data-ar]").forEach(b=>{let sure=false;b.onclick=()=>{if(!sure){sure=true;b.textContent="Tap again to restore";return}try{bkApply(JSON.parse(l[b.dataset.ar].d))}catch(e){bkMsg("Could not restore that save.",false)}}})}
 autoSave(false);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")autoSave(false)});window.addEventListener("pagehide",()=>autoSave(false));
-function wireSwitch(){const sw=$("tabs").querySelector(".sw");if(!sw)return;
+function wireSwitchOld(){const sw=$("tabs").querySelector(".sw");if(!sw)return;
   const go=()=>{if(mode==="cal")switchPage(page==="learning"?"projects":"learning");else switchPage(page)};
   sw.onclick=go;sw.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}}}
 let teCur=null,teB=null,teSize=15,teSure=false;
@@ -1207,9 +1255,9 @@ $("bk2Restore").onclick=()=>{const o=bk2Check();if(!o)return;if(!bk2Sure){bk2Sur
    Your data always saves on this device first. Sync copies it to your private
    Supabase account and brings changes from your other devices back. */
 const SB_URL="https://woxcixlydqnrqtwzkkkz.supabase.co",SB_KEY="sb_publishable_BoDuXP_g0AJkWfqD6sa0HQ_gWeYE6yE",SYNC_KEY="project-desk-sync";
-const B_KEY={projects:"project-desk-v1",learning:"project-desk-learning-v1",shelf:"project-desk-shelf-v1",boards:"project-desk-boards-v1",todo:"project-desk-todo-v1"};
+const B_KEY={projects:"project-desk-v1",learning:"project-desk-learning-v1",shelf:"project-desk-shelf-v1",boards:"project-desk-boards-v1",todo:"project-desk-todo-v1",body:"project-desk-body-v1"};
 const BUCKETS=Object.keys(B_KEY),K_B={};BUCKETS.forEach(b=>{K_B[B_KEY[b]]=b});
-const B_NAME={projects:"Projects",learning:"Learning topics",shelf:"Shelf",boards:"Boards",todo:"Old to-do lists"};
+const B_NAME={projects:"Projects",learning:"Learning topics",shelf:"Shelf",boards:"Boards",todo:"Old to-do lists",body:"Body"};
 let ss={};try{ss=JSON.parse(localStorage.getItem(SYNC_KEY))||{}}catch(e){ss={}}
 ss.rev=ss.rev||{};ss.dirty=ss.dirty||{};
 const _setItem=Storage.prototype.setItem;
@@ -1221,10 +1269,10 @@ Storage.prototype.setItem=function(k,v){_setItem.call(this,k,v);if(this===localS
 function schedulePush(){if(!sbUser)return;clearTimeout(pushT);pushT=setTimeout(requestSync,1500);updateSyncUI()}
 
 const stable=o=>o===null||typeof o!=="object"?JSON.stringify(o):Array.isArray(o)?"["+o.map(stable).join(",")+"]":"{"+Object.keys(o).sort().map(k=>JSON.stringify(k)+":"+stable(o[k])).join(",")+"}";
-function normB(b,o){if(b!=="boards"||!o||typeof o!=="object")return o;const c=Object.assign({},o);delete c.cur;delete c.size;delete c.full;return c}
+function normB(b,o){if(!o||typeof o!=="object")return o;const c=Object.assign({},o);delete c._av;if(b==="boards"){delete c.cur;delete c.size;delete c.full}return c}
 const same=(b,x,y)=>stable(normB(b,x))===stable(normB(b,y));
 function describe(b,o){if(!o)return"nothing";
-  if(b==="projects"||b==="learning")return(o.list||[]).length+(b==="projects"?" projects, ":" topics, ")+(o.cal||[]).length+" scheduled cards, "+Object.keys(o.notes||{}).length+" logs";
+  if(b==="projects"||b==="learning"||b==="body")return(o.list||[]).length+(b==="projects"?" projects, ":b==="body"?" items, ":" topics, ")+(o.cal||[]).length+" scheduled cards, "+Object.keys(o.notes||{}).length+" logs";
   if(b==="shelf")return(o.pads||[]).length+" pads, "+(o.books||[]).length+" log books, "+(o.comps||[]).length+" completions";
   if(b==="boards")return(o.boards||[]).length+" boards, "+(o.boards||[]).reduce((n,x)=>n+(x.pins||[]).length,0)+" pins";
   if(b==="todo")return(o.lists||[]).length+" lists";return""}
@@ -1235,7 +1283,7 @@ function uiBusy(){const d=document.querySelector("dialog[open]");if(d&&d.id!=="s
   return !!document.querySelector(".drag")}
 function defer(){clearTimeout(deferT);deferT=setTimeout(requestSync,2000)}
 function reloadMem(b){
-  if(b==="projects"||b==="learning"){if(page!==b)return;const s=safeLoad(B_KEY[b],o=>o&&Array.isArray(o.list));if(s){s.cal=s.cal||[];s.list.forEach((p,i)=>{if(p.h===undefined)p.h=(i*47)%360});S=s}}
+  if(b==="projects"||b==="learning"||b==="body"){if(page!==b)return;const s=safeLoad(B_KEY[b],o=>o&&Array.isArray(o.list));if(s){s.cal=s.cal||[];s.list.forEach((p,i)=>{if(p.h===undefined)p.h=(i*47)%360});S=s}}
   else if(b==="shelf"){const p=safeLoad(B_KEY.shelf,o=>o&&Array.isArray(o.pads));if(p){p.books=p.books||[];p.comps=p.comps||[];P=p}}
   else if(b==="boards"){const k=safeLoad(B_KEY.boards,o=>o&&Array.isArray(o.boards));if(k){const cur=K.cur,size=K.size;k.full=false;if(cur&&k.boards.some(x=>x.id===cur))k.cur=cur;if(size)k.size=size;K=k}}
   else if(b==="todo"){const t=safeLoad(B_KEY.todo,o=>o&&Array.isArray(o.lists));if(t)T=t}}
@@ -1255,15 +1303,16 @@ function ensureLib(){return new Promise(res=>{if(window.supabase&&window.supabas
   s.onload=()=>res(!!(window.supabase&&window.supabase.createClient));s.onerror=()=>{s.remove();res(false)};document.head.appendChild(s)})}
 async function pushBucket(b){
   const raw=localStorage.getItem(B_KEY[b]);if(raw==null){ss.dirty[b]=false;saveSS();return true}
-  let data;try{data=JSON.parse(raw)}catch(e){return true}
+  let data;try{data=JSON.parse(raw);data._av=APP_VER}catch(e){return true}
   const r=await sb.from("app_data").update({data}).eq("user_id",sbUser.id).eq("bucket",b).eq("revision",ss.rev[b]).select("revision");
   if(r.error)throw r.error;
   if(r.data&&r.data.length){ss.rev[b]=r.data[0].revision;ss.dirty[b]=(localStorage.getItem(B_KEY[b])!==raw);saveSS();return true}
   return false}
 async function reconcile(){
-  const r=await sb.from("app_data").select("bucket,data,revision,updated_at");
+  sync.warn="";const r=await sb.from("app_data").select("bucket,data,revision,updated_at");
   if(r.error)throw r.error;
   const R={};(r.data||[]).forEach(x=>{R[x.bucket]=x});
+  if((r.data||[]).some(x=>x.data&&x.data._av>APP_VER)){sync.outdated=true;return}sync.outdated=false;
   const need=[];
   for(const b of BUCKETS){
     if(sync.hold[b])continue;
@@ -1273,8 +1322,8 @@ async function reconcile(){
       if(!row&&raw==null)continue;
       if(row&&raw==null){if(!applyRemote(b,row))defer();continue}
       if(!row){
-        if(ss.init&&lo){const ins=await sb.from("app_data").insert({bucket:b,data:lo}).select("revision");
-          if(ins.error){if(ins.error.code==="23505"){syncQueued=true;continue}throw ins.error}
+        if(ss.init&&lo){const ins=await sb.from("app_data").insert({bucket:b,data:Object.assign({},lo,{_av:APP_VER})}).select("revision");
+          if(ins.error){if(ins.error.code==="23505"){syncQueued=true;continue}if(ins.error.code==="23514"){sync.warn="Body can't sync yet: the cloud needs a one-time update (see the instructions I sent).";continue}throw ins.error}
           ss.rev[b]=ins.data[0].revision;ss.dirty[b]=false;saveSS();continue}
         need.push({b,kind:"upload"});continue}
       if(lo&&same(b,lo,row.data)){ss.rev[b]=row.revision;ss.dirty[b]=false;saveSS();continue}
@@ -1293,7 +1342,7 @@ async function runSync(){
   try{
     if(!navigator.onLine)throw new Error("offline");
     let n=0;do{syncQueued=false;await reconcile()}while(syncQueued&&++n<4);
-    if(!sync.decide)ss.init=true;sync.last=Date.now();ss.last=sync.last;saveSS();sync.err="";retryN=0;sync.state="synced";
+    if(!sync.decide)ss.init=true;sync.last=Date.now();ss.last=sync.last;saveSS();sync.err="";retryN=0;sync.state=sync.outdated?"outdated":"synced";
   }catch(e){sync.err=(e&&e.message)||String(e);sync.state=navigator.onLine?"error":"offline";scheduleRetry()}
   syncRunning=false;updateSyncUI();
   if(syncQueued){syncQueued=false;requestSync()}}
@@ -1306,14 +1355,14 @@ async function resolveDecision(choice){
     for(const it of d.items){const b=it.b,raw=localStorage.getItem(B_KEY[b]);
       if(it.kind==="upload"){
         if(raw==null){delete sync.hold[b];continue}
-        const r=await sb.from("app_data").insert({bucket:b,data:JSON.parse(raw)}).select("revision");
-        if(r.error)throw r.error;ss.rev[b]=r.data[0].revision;ss.dirty[b]=false}
+        const r=await sb.from("app_data").insert({bucket:b,data:Object.assign(JSON.parse(raw),{_av:APP_VER})}).select("revision");
+        if(r.error){if(r.error.code==="23514"){sync.warn="Body can't sync yet: the cloud needs a one-time update (see the instructions I sent).";delete sync.hold[b];d.items=d.items.filter(x=>x!==it);continue}throw r.error}ss.rev[b]=r.data[0].revision;ss.dirty[b]=false}
       else if(choice==="cloud"){
         if(raw!=null)autoPush({[B_KEY[b]]:raw});
         if(!applyRemote(b,it.row))throw new Error("Close any open windows and try again.")}
       else{
         autoPush({[B_KEY[b]]:JSON.stringify(it.row.data)});
-        const r=await sb.from("app_data").update({data:JSON.parse(raw)}).eq("user_id",sbUser.id).eq("bucket",b).eq("revision",it.row.revision).select("revision");
+        const r=await sb.from("app_data").update({data:Object.assign(JSON.parse(raw),{_av:APP_VER})}).eq("user_id",sbUser.id).eq("bucket",b).eq("revision",it.row.revision).select("revision");
         if(r.error)throw r.error;if(!r.data.length)throw new Error("The cloud changed again. Please try once more.");
         ss.rev[b]=r.data[0].revision;ss.dirty[b]=false}
       delete sync.hold[b];d.items=d.items.filter(x=>x!==it)}
@@ -1344,7 +1393,7 @@ function ago(t){if(!t)return"never";const s=Math.round((Date.now()-t)/1000);retu
 function updateSyncUI(){const btn=$("syncBtn");if(!btn)return;
   let st=sync.state;if(!sbUser&&st!=="nolib"&&st!=="boot")st="signedout";
   if(sbUser&&sync.decide)st="decide";else if(sbUser&&st==="synced"&&pendingCount())st="pending";
-  const labels={nolib:"Sync unavailable",boot:"Sync starting",signedout:"Sign in to sync",syncing:"Syncing",synced:"Synced",pending:"Changes waiting to sync",offline:"Offline",error:"Sync problem",decide:"Sync needs your decision"};
+  const labels={nolib:"Sync unavailable",boot:"Sync starting",signedout:"Sign in to sync",syncing:"Syncing",synced:"Synced",pending:"Changes waiting to sync",offline:"Offline",error:"Sync problem",decide:"Sync needs your decision",outdated:"Update needed"};
   btn.dataset.s=st;btn.title=labels[st]||"Sync";btn.setAttribute("aria-label",labels[st]||"Sync");
   let t="";const n=pendingCount();
   if(st==="nolib")t="Sync couldn't start because its library didn't load. Check your internet connection and reload the page. Your data is still saved on this device.";
@@ -1356,8 +1405,8 @@ function updateSyncUI(){const btn=$("syncBtn");if(!btn)return;
     else if(st==="pending")t+=n+" section"+(n>1?"s":"")+" waiting to sync.";
     else if(st==="offline")t+="You're offline. "+(n?n+" section"+(n>1?"s":"")+" will sync when you're back online. ":"")+"Your changes are safe on this device.";
     else if(st==="error")t+="Couldn't reach the cloud ("+sync.err+"). Trying again automatically. Your changes are safe on this device.";
-    else if(st==="decide")t+="Your decision is needed below. Syncing is paused for the sections listed."}
-  $("sStatus").textContent=t;
+    else if(st==="decide")t+="Your decision is needed below. Syncing is paused for the sections listed.";else if(st==="outdated")t+="This device runs an older version of the app. Close it and reopen it, or reload twice, to update. Syncing is paused so nothing gets overwritten."}
+  $("sStatus").textContent=t+(sync.warn?" "+sync.warn:"");
   $("sOut").hidden=st!=="signedout";$("sIn").hidden=!sbUser;$("sDecide").hidden=!(sbUser&&sync.decide);
   if(sbUser&&sync.decide&&shownDecide!==sync.decide.id+":"+sync.decide.items.length){shownDecide=sync.decide.id+":"+sync.decide.items.length;drawDecide()}
   if(sbUser&&sync.decide)$("sDErr").textContent=sync.err&&st==="decide"?sync.err:"";
@@ -1389,14 +1438,77 @@ document.addEventListener("visibilitychange",()=>{if(document.visibilityState===
 window.addEventListener("focus",requestSync);
 updateSyncUI();initSync();
 
+/* ===== Version 3 additions ===== */
+const APP_VER=2;
+const PG_ORDER=["projects","learning","body"],PG_NAME={projects:"Projects",learning:"Learning topics",body:"Body"},PG_SHORT3={projects:"Projects",learning:"Learning",body:"Body"},PG_ADJ={projects:"project",learning:"learning",body:"body"},PG_COLOR={projects:"#4f81bd",learning:"#6a9a3a",body:"#d98c1f"};
+let hideTasks=false;try{hideTasks=localStorage.getItem("project-desk-hide-tasks")==="1"}catch(e){}
+let armedE=null,openScroll=null;
+/* keep the page where it was after every redraw (fixes the screen jumping) */
+function render(){const x=window.scrollX,y=window.scrollY;renderMain();window.scrollTo(x,y)}
+/* order of cards inside a day */
+function updMove(){const c=curCard,same=c&&c.date?S.cal.filter(e=>e.date===c.date):[],i=same.indexOf(c);
+  $("cUp").disabled=!(c&&c.date)||i<=0;$("cDn").disabled=!(c&&c.date)||i<0||i>=same.length-1;
+  $("cPos").textContent=c&&c.date&&same.length>1?(i+1)+" of "+same.length+" on this day":(c&&c.date?"Only card on this day":"")}
+function moveInDay(dir){const c=curCard;if(!c||!c.date)return;const same=S.cal.filter(e=>e.date===c.date),i=same.indexOf(c),j=i+dir;if(j<0||j>=same.length)return;
+  const a=S.cal.indexOf(c),b=S.cal.indexOf(same[j]);S.cal[a]=same[j];S.cal[b]=c;save();updMove()}
+$("cUp").onclick=()=>moveInDay(-1);$("cDn").onclick=()=>moveInDay(1);
+/* backpack now also holds the card folder */
+function drawBp(){const l=$("bpList");
+  const cards=S.list.map(p=>`<div class="chip pick ${armed===p.id?"armed":""}" draggable="true" data-bp="${p.id}" style="border-left-color:${col(p)}"><span>${esc(p.name)}</span></div>`).join("")||'<div class="empty">No cards yet.</div>';
+  const fl=S.cal.filter(e=>!e.date&&S.list.find(p=>p.id===e.pid));
+  const fold=fl.map(e=>{const p=S.list.find(x=>x.id===e.pid),n=(e.tasks||[]).length;return `<div class="chip pick ${armedE===e.id?"armed":""}" draggable="true" data-bf="${e.id}" style="border-left-color:${col(p)}"><span>${esc(p.name)}${n?` <small class="tk">${n} task${n>1?"s":""}</small>`:""}</span></div>`}).join("")||'<div class="empty">The folder is empty.</div>';
+  l.innerHTML=`<div class="bph">Cards</div><div class="bpg">${cards}</div><div class="bph">Card folder</div><div class="bpg">${fold}</div>`;
+  l.querySelectorAll("[data-bp]").forEach(el=>{el.ondragstart=e=>e.dataTransfer.setData("text/plain","p:"+el.dataset.bp);el.onclick=()=>{armedE=null;armed=armed===el.dataset.bp?null:el.dataset.bp;drawBp()}});
+  l.querySelectorAll("[data-bf]").forEach(el=>{el.ondragstart=e=>e.dataTransfer.setData("text/plain","e:"+el.dataset.bf);el.onclick=()=>{armed=null;armedE=armedE===el.dataset.bf?null:el.dataset.bf;drawBp()}});
+  $("bpCount").textContent="("+(S.list.length+fl.length)+")"}
+/* hide or show tasks on cards */
+$("cal").addEventListener("click",e=>{const b=e.target.closest("#tkSw");if(!b)return;hideTasks=!hideTasks;try{localStorage.setItem("project-desk-hide-tasks",hideTasks?"1":"0")}catch(x){}render()});
+/* three-way Projects / Learning / Body switch */
+function wireSwitch(){const sw=$("tabs").querySelector(".sw");if(!sw)return;
+  const go=()=>{if(mode==="cal")switchPage(PG_ORDER[(PG_ORDER.indexOf(page)+1)%PG_ORDER.length]);else switchPage(page)};
+  sw.onclick=go;sw.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}}}
+function navHtml(){const cal=mode==="cal";
+  return `<div class="sw sw3" role="switch" tabindex="0" aria-checked="${page!=="projects"}" aria-label="${cal?"Switch between Projects, Learning and Body":"Back to the "+PG_NAME[page]+" calendar"}" data-on="${PG_ORDER.indexOf(page)}"${cal?"":' data-off="1"'}>${PG_ORDER.map(p=>`<span class="${page===p?"on":""}">${PG_SHORT3[p]}</span>`).join("")}</div><button role="tab" aria-selected="${mode==="boards"}" data-pg="boards" class="${mode==="boards"?"on":""}">Boards</button>`}
+const subTabs=()=>{const lg=PG_ORDER.includes(shelfTab);if(lg)lastLogs=shelfTab;
+  const tab=(id,label,on)=>`<button role="tab" aria-selected="${on}" data-st="${id}" class="${on?"on":""}">${label}</button>`;
+  const nxt=PG_ORDER[(PG_ORDER.indexOf(shelfTab)+1)%PG_ORDER.length];
+  return `<div class="tabs sub" role="tablist">${tab("pads","Pads",shelfTab==="pads")}${tab(lg?shelfTab:(lastLogs||page),"Logs",lg)}${tab("completions","Completions",shelfTab==="completions")}${tab("handheld","Handheld",shelfTab==="handheld")}${lg?`<div class="sw sw3" role="switch" tabindex="0" aria-checked="${shelfTab!=="projects"}" aria-label="Switch between Project, Learning and Body logs" data-on="${PG_ORDER.indexOf(shelfTab)}" data-st="${nxt}">${PG_ORDER.map(p=>`<span class="${shelfTab===p?"on":""}">${PG_SHORT3[p]}</span>`).join("")}</div>`:""}</div>`};
+/* ---- handheld notepad (arrow tab on the right edge, works on every tab) ---- */
+function handPad(create){let pad=P.pads.find(x=>x.id===P.hand);if(pad)return pad;pad=P.pads[0];
+  if(!pad&&create){pad={id:nid(),name:"Handheld notepad",color:PAL[P.pads.length%PAL.length],sheets:[""],cur:0};P.pads.push(pad)}
+  if(pad&&create){P.hand=pad.id;saveP()}return pad||null}
+function drawHand(){const pan=$("npPanel");if(!pan||pan.hidden)return;
+  const pad=handPad(true);if(!pad)return;
+  $("npSel").innerHTML=P.pads.map(p=>`<option value="${p.id}"${p.id===pad.id?" selected":""}>${esc(p.name)}</option>`).join("");
+  const n=pad.sheets.length;pad.cur=Math.max(0,Math.min(pad.cur||0,n-1));
+  const ed=$("npEd");if(document.activeElement!==ed)ed.innerHTML=toHtml(pad.sheets[pad.cur]||"");
+  $("npCnt").textContent="Sheet "+(pad.cur+1)+" of "+n;$("npPrev").disabled=pad.cur===0;$("npNext").disabled=pad.cur>=n-1}
+$("npTab").onclick=()=>{$("npPanel").hidden=false;$("npTab").hidden=true;drawHand()};
+$("npClose").onclick=()=>{$("npPanel").hidden=true;$("npTab").hidden=false};
+$("npSel").onchange=()=>{P.hand=$("npSel").value;saveP();drawHand()};
+const npSave=()=>{const pad=handPad(false);if(!pad)return;pad.sheets[pad.cur]=$("npEd").innerHTML;saveP()};
+$("npEd").oninput=npSave;
+$("npTb").querySelectorAll("[data-k]").forEach(b=>{b.onmousedown=e=>e.preventDefault();b.onclick=()=>{document.execCommand(b.dataset.k,false,null);npSave()}});
+$("npCheck").onmousedown=e=>e.preventDefault();
+$("npCheck").onclick=()=>{$("npEd").focus();document.execCommand("insertHTML",false,'<div class="ck"><span contenteditable="false"><input type="checkbox"></span>&nbsp;</div>');npSave()};
+$("npEd").addEventListener("change",e=>{if(e.target.type==="checkbox"){e.target.toggleAttribute("checked",e.target.checked);const ck=e.target.closest(".ck");if(ck)ck.classList.toggle("done",e.target.checked);npSave()}});
+$("npPrev").onclick=()=>{const p=handPad(false);if(!p)return;p.cur=Math.max(0,(p.cur||0)-1);saveP();drawHand()};
+$("npNext").onclick=()=>{const p=handPad(false);if(!p)return;p.cur=Math.min(p.sheets.length-1,(p.cur||0)+1);saveP();drawHand()};
+$("npNew").onclick=()=>{const p=handPad(true);if(!p)return;p.sheets.push("");p.cur=p.sheets.length-1;saveP();drawHand();$("npEd").innerHTML=""};
+function renderHandheld(box){const cur=(handPad(false)||{}).id;
+  box.innerHTML=`${subTabs()}<div class="empty" style="margin:6px 0 10px">Choose which pad the handheld notepad uses. The arrow tab on the right edge of the screen opens it on any tab, and you can switch pads from there too.</div>${P.pads.map(p=>{const first=plain(p.sheets[p.cur||0]||"").trim().slice(0,70);return `<div class="hrow"><span class="hdot" style="background:${p.color}"></span><div style="flex:1;min-width:0"><b>${esc(p.name)}</b><div class="empty">${p.sheets.length} sheet${p.sheets.length>1?"s":""}${first?" \u00b7 "+esc(first):""}</div></div>${p.id===cur?'<span class="hbadge">In use</span>':`<button data-hu="${p.id}">Use</button>`}</div>`}).join("")||'<div class="empty">No pads yet.</div>'}<button id="hNew" style="margin-top:6px">+ New pad for handheld</button>`;
+  wireSub(box);
+  box.querySelectorAll("[data-hu]").forEach(b=>b.onclick=()=>{P.hand=b.dataset.hu;saveP();drawHand();renderShelf()});
+  $("hNew").onclick=()=>askText({title:"New handheld pad",ph:"Pad name",ok:"Create",onOk:v=>{const pad={id:nid(),name:v,color:PAL[P.pads.length%PAL.length],sheets:[""],cur:0};P.pads.push(pad);P.hand=pad.id;saveP();drawHand();renderShelf()}})}
+
 function dayHtml(dt,today,other){const k=ymd(dt);
   const es=dayCards(k);
   const lbl=(focusWeek?dt.toLocaleDateString("default",{weekday:"short"})+" ":"")+(dt.getDate()===1?dt.toLocaleString("default",{month:"short"})+" 1":dt.getDate());
-  return `<div class="day ${other?"other":""} ${k===today?"today":""}" data-d="${k}" data-wkk="${ymd(new Date(dt.getFullYear(),dt.getMonth(),dt.getDate()-(dt.getDay()+6)%7))}"><div class="dn">${lbl}</div>${es}</div>`}
-function place(t,id,date){date=date||null;if(t==="p")S.cal.push({id:nid(),pid:id,date,tasks:[]});else{const e=S.cal.find(x=>x.id===id);if(e)e.date=date}armed=null;save();render()}
+  return `<div class="day ${other?"other":""} ${k===today?"today":""}${k<today?" past":""}" data-d="${k}" data-wkk="${ymd(new Date(dt.getFullYear(),dt.getMonth(),dt.getDate()-(dt.getDay()+6)%7))}"><div class="dn">${lbl}</div>${es}</div>`}
+function place(t,id,date){date=date||null;if(t==="p")S.cal.push({id:nid(),pid:id,date,tasks:[]});else{const e=S.cal.find(x=>x.id===id);if(e)e.date=date}armed=null;armedE=null;save();render()}
 function renderStore(){
   const st=S.cal.filter(e=>!e.date&&S.list.find(p=>p.id===e.pid)),box=$("store");
-  box.innerHTML=`<h3>Card storage</h3><div class="empty" style="margin:4px 0 10px">Drop a card here to store it with its tasks. Drag it back onto a day, or tap it and choose a day.</div><div class="stash">${st.map(e=>{const p=S.list.find(x=>x.id===e.pid),t=e.tasks||[];return `<div class="chip sc" draggable="true" data-e="${e.id}" style="border-left-color:${col(p)}${e.sz&&e.sz!==1?";--ts:"+e.sz:""}"><span data-edit="${e.id}"><b>${esc(p.name)}</b>${t.slice(0,5).map(x=>`<small class="tk tkb ${x.d?"done":""}">${esc(x.t)}</small>`).join("")||'<small class="tk">Tap to add tasks</small>'}${t.length>5?`<small class="tk">+${t.length-5} more</small>`:""}</span><button class="ghost" data-rm="${e.id}" aria-label="Delete card">&times;</button></div>`}).join("")||'<div class="empty">Nothing stored yet.</div>'}</div>`;
+  box.innerHTML=`<h3>Card folder</h3><div class="empty" style="margin:4px 0 10px">Drop a card here to keep it in the folder with its tasks. Drag it back onto a day, or tap it and choose a day.</div><div class="stash">${st.map(e=>{const p=S.list.find(x=>x.id===e.pid),t=e.tasks||[];return `<div class="chip sc" draggable="true" data-e="${e.id}" style="border-left-color:${col(p)}${e.sz&&e.sz!==1?";--ts:"+e.sz:""}"><span data-edit="${e.id}"><b>${esc(p.name)}</b>${hideTasks?"":t.slice(0,5).map(x=>`<small class="tk tkb ${x.d?"done":""}">${esc(x.t)}</small>`).join("")||'<small class="tk">Tap to add tasks</small>'}${!hideTasks&&t.length>5?`<small class="tk">+${t.length-5} more</small>`:""}</span><button class="ghost" data-rm="${e.id}" aria-label="Delete card">&times;</button></div>`}).join("")||'<div class="empty">The folder is empty.</div>'}</div>`;
   box.ondragover=e=>{e.preventDefault();box.classList.add("over")};
   box.ondragleave=()=>box.classList.remove("over");
   box.ondrop=e=>{e.preventDefault();box.classList.remove("over");const [t,id]=e.dataTransfer.getData("text/plain").split(":");if(t&&id)place(t,id,null)};
@@ -1414,7 +1526,7 @@ function wire(){
   $("nm").onclick=()=>{focusWeek=null;vm.setMonth(vm.getMonth()+1);render()};
   
   $("plus").onclick=()=>{$("aName").value="";$("adlg").showModal();$("aName").focus()};
-  c.querySelectorAll("[data-p]").forEach(el=>{el.ondragstart=e=>e.dataTransfer.setData("text/plain","p:"+el.dataset.p);el.onclick=()=>{armed=armed===el.dataset.p?null:el.dataset.p;render()}});
+  c.querySelectorAll("[data-p]").forEach(el=>{el.ondragstart=e=>e.dataTransfer.setData("text/plain","p:"+el.dataset.p);el.onclick=()=>{armedE=null;armed=armed===el.dataset.p?null:el.dataset.p;render()}});
   c.querySelectorAll("[data-m]").forEach(b=>b.onclick=e=>{e.stopPropagation();openManage(b.dataset.m)});
   c.querySelectorAll("[data-e]").forEach(el=>el.ondragstart=e=>e.dataTransfer.setData("text/plain","e:"+el.dataset.e));
   c.querySelectorAll("[data-rm]").forEach(b=>b.onclick=e=>{e.stopPropagation();S.cal=S.cal.filter(x=>x.id!==b.dataset.rm);save();render()});
@@ -1423,7 +1535,7 @@ function wire(){
     d.ondragover=e=>{e.preventDefault();d.classList.add("over")};
     d.ondragleave=()=>d.classList.remove("over");
     d.ondrop=e=>{e.preventDefault();const [t,id]=e.dataTransfer.getData("text/plain").split(":");place(t,id,d.dataset.d)};
-    d.onclick=()=>{if(armed)place("p",armed,d.dataset.d)};
+    d.onclick=()=>{if(armed)place("p",armed,d.dataset.d);else if(armedE)place("e",armedE,d.dataset.d)};
   });
 }
 
@@ -1437,16 +1549,16 @@ $("mDel").onclick=()=>{
   S.list=S.list.filter(p=>p.id!==editing.id);S.cal=S.cal.filter(e=>e.pid!==editing.id);if(armed===editing.id)armed=null;save();$("mdlg").close();render();
 };
 
-function openCard(id){curCard=S.cal.find(x=>x.id===id);if(!curCard)return;const p=S.list.find(x=>x.id===curCard.pid);curCard.tasks=curCard.tasks||[];$("cTitle").textContent=p.name;$("cDay").value=curCard.date||"";showSz();$("cLogMsg").textContent="";drawCard();if(!$("cdlg").open)$("cdlg").showModal();$("cNew").focus()}
+function openCard(id){curCard=S.cal.find(x=>x.id===id);if(!curCard)return;const p=S.list.find(x=>x.id===curCard.pid);curCard.tasks=curCard.tasks||[];$("cTitle").textContent=p.name;$("cDay").value=curCard.date||"";showSz();updMove();$("cLogMsg").textContent="";drawCard();if(!$("cdlg").open){openScroll=[window.scrollX,window.scrollY];$("cdlg").showModal()}}
 function drawCard(){const c=curCard,box=$("cTasks");
-  box.innerHTML=c.tasks.map((x,i)=>`<div class="act ${x.d?"done":""}"><input type="checkbox" data-ci="${i}" ${x.d?"checked":""} aria-label="Done"><span>${esc(x.t)}</span><button class="ghost" data-cd="${i}" aria-label="Remove task">&times;</button></div>`).join("")||'<div class="empty">No tasks yet. Add what you will do on this day.</div>';
+  box.innerHTML=c.tasks.map((x,i)=>`<div class="act ${x.d?"done":""}"><input type="checkbox" data-ci="${i}" ${x.d?"checked":""} aria-label="Done"><span>${esc(x.t)}</span><button class="ghost" data-cp="${i}" aria-label="Copy task" title="Copy task">&#10064;</button><button class="ghost" data-cd="${i}" aria-label="Remove task">&times;</button></div>`).join("")||'<div class="empty">No tasks yet. Add what you will do on this day.</div>';
   box.querySelectorAll("[data-ci]").forEach(el=>el.onchange=()=>{const tk=c.tasks[el.dataset.ci];tk.d=el.checked;logTask(c,tk,el.checked);save();drawCard()});
-  box.querySelectorAll("[data-cd]").forEach(el=>el.onclick=()=>{c.tasks.splice(el.dataset.cd,1);save();drawCard()})}
+  box.querySelectorAll("[data-cd]").forEach(el=>el.onclick=()=>{c.tasks.splice(el.dataset.cd,1);save();drawCard()});box.querySelectorAll("[data-cp]").forEach(el=>el.onclick=()=>{const i=+el.dataset.cp;c.tasks.splice(i+1,0,{t:c.tasks[i].t,d:false});save();drawCard()})}
 function addCardTask(){const v=$("cNew").value.trim();if(!v)return;curCard.tasks.push({t:v,d:false});$("cNew").value="";save();drawCard();$("cNew").focus()}
 $("cAdd").onclick=addCardTask;$("cNew").onkeydown=e=>{if(e.key==="Enter")addCardTask()};
 $("cDone").onclick=()=>$("cdlg").close();$("cClose").onclick=()=>$("cdlg").close();
-$("cdlg").onclose=()=>{render();flashNew()};
-$("cDay").onchange=()=>{curCard.date=$("cDay").value||null;save()};
+$("cdlg").onclose=()=>{render();if(flashId)flashNew();else if(openScroll)window.scrollTo(openScroll[0],openScroll[1])};
+$("cDay").onchange=()=>{curCard.date=$("cDay").value||null;save();updMove()};
 $("cStore").onclick=()=>{curCard.date=null;save();$("cdlg").close()};
 let wkKey=null;
 function setLogTitle(k){const t=$("nTitle"),mo=k.startsWith("m:");$("nText").dataset.ph=mo?"End-of-month log":"Log for this week";
